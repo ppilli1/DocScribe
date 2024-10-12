@@ -27,10 +27,10 @@ RESET_COLOR = '\033[0m'
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 
-messages_medication = [HumanMessage(content = "this is the start of the convo. You will get a bunch of data of what is happening in a conversation between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with medication prescribed or told the patient to take based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the data and only respond if you think there has been some sort of error medication related. your response should be very concise and only be a statement stating the error made with medication.")]
-messages_diagnosis = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with the diagnosis based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there has bees some sort of error diagnosis related. your response should be very concise and only be a statement stating the error made with diagnosis.")]
+messages_medication = [HumanMessage(content = "this is the start of the convo. You will get a bunch of data of what is happening in a conversation between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with medication prescribed or told the patient to take based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the data and only respond if you think there has been some sort of error medication related. your response should be very concise and only be a statement stating the error made with medication. If a medication was not prescribed, please respond with 'No medication prescribed.'")]
+messages_diagnosis = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with the diagnosis based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there has bees some sort of error diagnosis related. your response should be very concise and only be a statement stating the error made with diagnosis. If a diagnosis was not made, please respond with 'No diagnosis made.'")]
 messages_clarify = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of questions that need to be clarified based on what the patient described as their problem or questions the doctor should ask to make a better diagnosis. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there is something the doctor should ask or clarify. Only respond with one question that you think should be asked or clarified and make sure it is concise.")]
-
+patient_questions = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of questions that the patient asked that were not answered by the doctor. Do not reply to this message. Please just analyze the conversation and respond with a singular question that you think is good for the patient to ask for their own knowledge, such as 'what is the side effect of this medication?' Your response should be very concise and only be a statement of the question the patient should ask.")]
 hundred_txt = ""
 hundred_txt_syn = ""
 
@@ -81,7 +81,7 @@ def transcription_worker(model, file_paths, events):
         hundred_txt = hundred_txt + " " + transcription
 
         words = hundred_txt.split()  
-
+        words2 = hundred_txt.split("")
         if len(words) >= 20:
             md = metadata(hundred_txt)
             medication_errors(md)
@@ -92,6 +92,9 @@ def transcription_worker(model, file_paths, events):
                 file.write("\n")
             hundred_txt = ""
             print("reset")
+        if len(words2) >= 40:
+            patient_question_helper(words2)
+            hundred_txt = ""
         print(NEON_GREEN + transcription + RESET_COLOR)
 
         if os.path.exists(transcription_file):
@@ -103,6 +106,20 @@ def transcription_worker(model, file_paths, events):
 
         time.sleep(0.5)  
         
+def patient_question_helper(txt : str):
+    chat_model = ChatOpenAI(openai_api_key = api_key)
+    
+    patient_questions.append(HumanMessage(content = txt)) 
+
+    result = chat_model.predict_messages(patient_questions)
+
+    write_content = result.content
+    print("patient question: " + write_content)
+    with open('./assets/patient_question.txt', 'w') as file:
+        file.write(write_content)
+
+
+
 def metadata(text : str):
     url = 'https://api.openai.com/v1/chat/completions'
     headers = {
@@ -180,6 +197,7 @@ def clarify_questions(text : str):
         file.write(write_content)
         file.write("\n")
 
+    
     
 def memory_use_diagnosis(text : str):
     #messages.append(HumanMessage(content = text + "This is how far the conversation has reached. Is there a very concise question you want the doctor to see that would help him or her understand the situation better?"))
