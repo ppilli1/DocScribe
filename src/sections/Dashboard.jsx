@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
+import axios from 'axios';
 import { Link } from "react-router-dom";
 import taxCutImage from "../assets/taxCut.jpg";
 import ParticlesBackground from "../components/ParticlesBackground";
@@ -26,6 +27,39 @@ const Dashboard = () => {
     loop: true,
     delaySpeed: 1000,
   });
+
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    } else {
+      console.error('fileInputRef is not attached to the input element');
+    }
+  };
+
+  const handleFileChange = async (event) => {
+    const files = event.target.files;
+    const formData = new FormData();
+
+    // Append each file along with its relative path to the FormData object
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        formData.append('files', file);
+        formData.append('paths', file.webkitRelativePath);
+    }
+
+    try {
+        const response = await axios.post('http://127.0.0.1:5173/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        console.log('Files uploaded successfully:', response.data);
+    } catch (error) {
+        console.error('Upload error:', error.response.data);
+    }
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white antialiased selection:bg-rose-300 selection:text-rose-800 hide-scrollbar">
@@ -83,7 +117,15 @@ const Dashboard = () => {
         </div>
         <div className = "w-1/3">
             <div className = "flex items-center justify-center">
-              <button className = "hover:opacity-50 ease-in-out duration-300">
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+                
+                directory="false"
+              />
+              <button className = "hover:opacity-50 ease-in-out duration-300" onClick={handleButtonClick}>
                 <img
                     src = {patientHistory}
                     alt = "Patient History Form"

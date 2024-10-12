@@ -11,33 +11,42 @@ from langchain.schema import HumanMessage, AIMessage
 from langchain_community.chat_models import ChatOpenAI
 app = Flask(__name__)
 #specify domain and port for every endpoint
-CORS(app, resources={r"/MD": {"origins": "http://localhost:5116"}})
-CORS(app, resources={r"/OR": {"origins": "http://localhost:5116"}})
+CORS(app, resources={r"/MD": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/OR": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/upload": {"origins": "http://localhost:5173"}})
 api_key = os.getenv("OPENAI_API_KEY")
 messages_red = []
 
-def ty():
 
+
+
+@app.route('/upload', methods=['POST'])
+def upload_files():
+    if 'files' not in request.files or 'paths' not in request.form:
+        return 'No file part or path in the request', 400
     
-    with open("./assets/OR_full.txt", 'r') as file:
-        file_contents = file.read()
-        print("file read")
-    url = 'https://hooks.spline.design/J44c_9tGM6w'
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'AI5r3atVzdVoqq1etnEbdBXn0rMpkEDfnZL2PlyoDFo',
-        'Accept': 'application/json'
-    }
+    files = request.files.getlist('files')
+    paths = request.form.getlist('paths')
 
-    data = {
-        "vr": file_contents
-    }
+    base_directory = './uploaded_files'
 
-    response = requests.post(url, headers=headers, data=json.dumps(data))
+    for i in range(len(files)):
+        file = files[i]
+        relative_path = paths[i]
+        
+        # Create the full directory path
+        full_path = os.path.join(base_directory, os.path.dirname(relative_path))
 
-    print(response.status_code)
-    print(response.text)
-    return "HI"
+        if not os.path.exists(full_path):
+            os.makedirs(full_path)
+
+        # Save the file with its original filename in the correct folder
+        file.save(os.path.join(full_path, file.filename))
+        print(f'File {file.filename} uploaded successfully to {full_path}')
+    
+    
+    
+    return 'Files uploaded successfully', 200
     
 @app.route('/red2', methods=['GET'])
 def ty111():
@@ -58,4 +67,4 @@ def MD_logic():
 
 
 if __name__ == '__main__':
-    app.run(use_reloader=True, port=5161, threaded=True)
+    app.run(use_reloader=True, port=5173, threaded=True)
