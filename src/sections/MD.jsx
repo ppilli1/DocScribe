@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import { FaArrowUp } from "react-icons/fa";
 
-
-
 const MD = () => {
   const [messages, setMessages] = useState([
     {
@@ -310,19 +308,19 @@ const MD = () => {
       </div>
       <div className="absolute -z-10 min-h-full w-full bg-gradient-to-r from-[#f0f9fd] to-[#65c0e7]"></div>
       <div className="flex items-start justify-center">
-        <h3 className="uppercase tracking-[20px] text-fuchsia-600 text-2xl mt-[120px] ml-6">
+        <h3 className="uppercase tracking-[20px] text-blue-700 text-2xl mt-[120px] ml-6">
           Medications / Diagnosis
         </h3>
       </div>
-      <div className="flex flex-wrap mt-[100px]">
+      <div className="flex flex-wrap mt-[100px] pb-20">
         <div className="w-1/2">
-          <div className="flex justify-center items-center mb-10 no-scrollbar">
-            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-fuchsia-600">
+          <div className="flex justify-center items-center mb-10 ml-[90px] my-[18px]">
+            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
               Medications
             </span>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="box-border h-[366px] w-[600px] border-[4px] border-pink-300 hover:border-pink-500 transition-all hover:shadow-2xl hover:shadow-pink-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/50 flex">
+          <div className="flex justify-center ml-10">
+            <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/50 flex">
               <div className="overflow-y-auto p-4">
                 {messages.map((message, index) => (
                   <div
@@ -336,7 +334,7 @@ const MD = () => {
                     <div
                       className={`${
                         message.direction === "incoming"
-                          ? "bg-pink-500 text-white"
+                          ? "bg-blue-500 text-white"
                           : "text-blue"
                       } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                     >
@@ -355,133 +353,48 @@ const MD = () => {
                 <div ref={messagesEndRef} />
               </div>
             </div>
-            <div className="flex justify-center items-center my-[18px] no-scrollbar">
-              <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-fuchsia-600">
-                Diagnosis
-              </span>
-            </div>
-            <div className="box-border h-[366px] w-[600px] border-[4px] border-pink-300 hover:border-pink-500 transition-all hover:shadow-2xl hover:shadow-pink-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/50 flex">
-              <div className="overflow-y-auto p-4">
-                {messages1.map((message, index) => (
+          </div>
+        </div>
+        <div className="w-1/2">
+          <div className="flex justify-center items-center mb-10 my-[18px] no-scrollbar">
+            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
+              Diagnosis
+            </span>
+          </div>
+          <div className = "flex justify-center mr-10">
+          <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/50 flex">
+            <div className="overflow-y-auto p-4">
+              {messages1.map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex mb-4 ${
+                    message.direction === "incoming"
+                      ? "justify-start"
+                      : "hidden"
+                  }`}
+                >
                   <div
-                    key={index}
-                    className={`flex mb-4 ${
+                    className={`${
                       message.direction === "incoming"
-                        ? "justify-start"
-                        : "hidden"
-                    }`}
+                        ? "bg-blue-500 text-white"
+                        : "text-blue"
+                    } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                   >
-                    <div
-                      className={`${
-                        message.direction === "incoming"
-                          ? "bg-pink-500 text-white"
-                          : "text-blue"
-                      } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
-                    >
-                      {/* PUT MESSAGE FOR DIAGNOSIS ERROR */}
-                      {message.message}
-                    </div>
+                    {/* PUT MESSAGE FOR DIAGNOSIS ERROR */}
+                    {message.message}
                   </div>
-                ))}
-                {/* {typing && (
+                </div>
+              ))}
+              {/* {typing && (
                 <div className="flex justify-start mb-4">
                   <div className="bg-pink-500 text-white p-3 rounded-[1.25rem] max-w-xs shadow-lg">
                     ChatGPT is typing...
                   </div>
                 </div>
               )} */}
-                <div ref={messagesEndRef} />
-              </div>
+              <div ref={messagesEndRef} />
             </div>
           </div>
-        </div>
-        <div className="w-1/2">
-          <div className="flex justify-center items-center mb-10 mr-[92px]">
-            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-fuchsia-600">
-              Clarifying Questions
-            </span>
-          </div>
-          <div className="box-border h-[800px] w-[700px] border-[4px] border-pink-300 hover:border-pink-500 transition-all hover:shadow-2xl hover:shadow-pink-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-slate-100 flex flex-col mb-[40px]">
-            {/* <div className = "h-1/10 flex items-center justify-center border-b-[2px]">
-              <div className = "text-black text-2xl text-center">
-                bro
-              </div>
-            </div> */}
-            {/* Message List */}
-
-            <div className="h-4/5 overflow-y-auto p-4">
-              {/* Display the chat history */}
-              {chatHistory.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex mb-4 ${
-                    message.direction === "incoming"
-                      ? "justify-start"
-                      : "justify-end"
-                  }`}
-                >
-                  <div
-                    className={`${
-                      message.direction === "incoming"
-                        ? "bg-[#E5E5EA] text-black"
-                        : "bg-pink-500 text-white"
-                    } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
-                  >
-                    {message.message}
-                  </div>
-                </div>
-              ))}
-
-              {/* User Input */}
-            </div>
-            {/* <div className="h-1/5 flex items-center justify-between px-4 py-2">
-              <textarea
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                className="w-full resize-none rounded-[1.25rem] border-[2px] border-slate-300 bg-white px-3 py-3 text-md focus:bg-white focus:text-black hover:border-slate-400 focus:outline-none transition-colors duration-300 overflow-y-scroll no-scrollbar"
-                placeholder="Type your message..."
-                rows="4"
-              >
-                <text className = "flex justify-end"></text>
-              </textarea>
-              <button
-                className={`ml-4 flex items-center justify-center p-4 rounded-lg border-[2px] border-stone-600 bg-white text-sm font-semibold text-stone-900 hover:bg-slate-300 active:bg-slate-300/50 transition-colors duration-300 ${
-                  isSending ? "cursor-not-allowed opacity-50" : ""
-                }`}
-                onClick={handleSend}
-                disabled={isSending}
-              >
-                {isSending ? (
-                  "Sending..."
-                ) : (
-                  <>
-                    Send <FiSend className="ml-2" />
-                  </>
-                )}
-              </button>
-            </div> */}
-            <div className="px-4 py-4 flex justify-center items-center">
-              <div className="flex w-[95%] h-[100%] resize-none rounded-[1.25rem] border-[2px] border-pink-300 bg-white hover:border-pink-500 focus:outline-none transition-colors duration-300">
-                <textarea
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  className="w-[92%] px-3 py-3 text-md rounded-[1.25rem] focus:bg-white focus:text-black focus:outline-none overflow-y-scroll no-scrollbar resize-none"
-                  placeholder="Type your response..."
-                  rows="4"
-                />
-                <div className="flex py-3 items-start justify-end w-[8%] mr-3">
-                  <button
-                    className={`rounded-3xl bg-pink-500 p-1 hover:bg-pink-700 active:bg-pink-700/50 transition-colors duration-300 focus:outline-none ${
-                      isSending ? "cursor-not-allowed opacity-50" : ""
-                    }`}
-                    onClick={handleSend}
-                    disabled={isSending}
-                  >
-                    <FaArrowUp className="text-white font-semibold text-lg" />
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

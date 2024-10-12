@@ -226,19 +226,19 @@ const CE = () => {
       </div>
       <div className="absolute -z-10 min-h-full w-full bg-gradient-to-r from-[#F0F9FD] to-[#65c0e7]"></div>
       <div className="flex items-start justify-center">
-        <h3 className="uppercase tracking-[20px] text-fuchsia-600 text-2xl mt-[120px] ml-6">
+        <h3 className="uppercase tracking-[20px] text-blue-700 text-2xl mt-[120px] ml-6">
           Operation Room
         </h3>
       </div>
       <div className="flex flex-wrap mt-[100px]">
         <div className="w-1/2">
           <div className="flex justify-center items-center mb-10 ml-[92px]">
-            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-fuchsia-600">
+            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
               Clarifying Questions
             </span>
           </div>
           <div className="flex justify-end">
-            <div className="box-border h-[800px] w-[700px] border-[4px] border-pink-300 hover:border-pink-500 transition-all hover:shadow-2xl hover:shadow-pink-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-slate-100 flex flex-col mb-[40px]">
+            <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-slate-100 flex flex-col mb-[40px]">
               {/* <div className = "h-1/10 flex items-center justify-center border-b-[2px]">
               <div className = "text-black text-2xl text-center">
                 bro
@@ -256,7 +256,7 @@ const CE = () => {
                       className={`${
                         message.direction === "incoming"
                           ? "bg-[#E5E5EA] text-black"
-                          : "bg-pink-500 text-white"
+                          : "bg-blue-500 text-white"
                       } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                     >
                       {message.message}
@@ -297,7 +297,7 @@ const CE = () => {
               </div> */}
               <div className="px-4 py-4 flex justify-center items-center">
                   
-                <div className="flex w-[95%] h-[100%] resize-none rounded-[1.25rem] border-[2px] border-pink-300 bg-white hover:border-pink-500 focus:outline-none transition-colors duration-300">
+                <div className="flex w-[95%] h-[100%] resize-none rounded-[1.25rem] border-[2px] border-blue-300 bg-white hover:border-blue-500 focus:outline-none transition-colors duration-300">
                   
                   <textarea
                     value={inputMessage}
@@ -309,7 +309,7 @@ const CE = () => {
                   <div className="flex py-3 items-start justify-end w-[8%] mr-3">
                     
                     <button
-                      className={`rounded-3xl bg-pink-500 p-1 hover:bg-pink-700 active:bg-pink-700/50 transition-colors duration-300 focus:outline-none ${
+                      className={`rounded-3xl bg-blue-500 p-1 hover:bg-blue-700 active:bg-blue-700/50 transition-colors duration-300 focus:outline-none ${
                         isSending ? 'cursor-not-allowed opacity-50' : ''
                       }`}
                       onClick={handleSend}

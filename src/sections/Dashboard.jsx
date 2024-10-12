@@ -20,11 +20,12 @@ const Dashboard = () => {
   const [text, count] = useTypewriter({
     words: [
       "Hey there! Welcome to DocScribe!",
+      "Upload your Patient History to get started!",
       "Providing medical feedback and accuracy to doctors and patients!",
       "Make sure your health is in the right hands!",
     ],
     loop: true,
-    delaySpeed: 1000,
+    delaySpeed: 500,
   });
 
   return (
@@ -83,7 +84,7 @@ const Dashboard = () => {
         </div>
         <div className = "w-1/3">
             <div className = "flex items-center justify-center">
-              <button className = "hover:opacity-50 ease-in-out duration-300">
+              <button className = "hover:opacity-50 ease-in-out duration-300 hover:scale-150">
                 <img
                     src = {patientHistory}
                     alt = "Patient History Form"
