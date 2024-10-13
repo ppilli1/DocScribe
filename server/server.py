@@ -4,6 +4,7 @@ import os
 import requests
 import json
 import shutil
+import rate_encounter
 from flask import jsonify
 import whisperMD
 import extractDoc
@@ -74,7 +75,10 @@ def stop():
     with open("./assets/turn_off.txt", "w") as file:
         file.write("1")
     
-
+@app.route('/rate', methods=['POST'])
+def try_rate():
+    num = rate_encounter.ratingz()
+    return num
 
 if __name__ == '__main__':
     app.run(use_reloader=True, port=5173, threaded=True)

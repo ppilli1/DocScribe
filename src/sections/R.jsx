@@ -15,6 +15,27 @@ const R = () => {
     },
   ]);
 
+  const fetchRating = async () => {
+    try {
+        const response = await fetch("http://localhost:5173/rate", { // Adjust URL as needed
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch rating.");
+        }
+
+        const num = await response.json(); // Assuming 'num' is returned as JSON
+        setDoctorEfficiency(num); // Set the received rating to the state variable
+        console.log("Rating received:", num);
+    } catch (error) {
+        console.error("Error fetching rating:", error);
+    }
+  };
+
   const [inputMessage, setInputMessage] = useState("");
   const [typing, setTyping] = useState(false);
   const [isSending, setIsSending] = useState(false);
