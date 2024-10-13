@@ -1,19 +1,77 @@
 import React from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import DoctorEfficiencyBar from "../components/DoctorEfficiencyBar";
 import patientHistory from "../assets/medScribe.webp"
 
 const R = () => {
   const [doctorEfficiency, setDoctorEfficiency] = useState(70);
 
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState("");
+
+  const[fmessages , setFMessages] = useState([
     {
       message: "Here are some improvements that you as the doctor can make:",
       sender: "ChatGPT",
       direction: "incoming",
-    },
+    }
   ]);
+
+  const fMessages = useCallback(async () => {
+    try {
+      const response = await fetch("/assets/improvement.txt");
+      const text12 = await response.text();
+      const newMessages = text12.split("\n").filter(Boolean); // Split by line and filter empty lines
+      
+      if (newMessages.length === 0) return; // If no new messages, exit early
+      
+      // Get the last message from fmessages to compare
+      const lastMessage = fmessages[fmessages.length - 1]?.message || "";
+
+      // Filter out any messages that are duplicates of the last message
+      const uniqueMessages = newMessages.filter(msg => msg !== lastMessage);
+
+      // If there's no unique message, exit early
+      if (uniqueMessages.length === 0) return;
+
+      // Update the state with new unique messages
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        ...uniqueMessages,
+      ]);
+
+      // Format the new unique messages
+      const formattedMessages = uniqueMessages.map((msg) => ({
+        message: msg,
+        sender: "ChatGPT",
+        direction: "incoming",
+      }));
+
+      // Update fmessages with the new unique messages
+      setFMessages((prevFMessages) => [...prevFMessages, ...formattedMessages]);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  }, [fmessages]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fMessages();
+    }, 1000);
+
+    return () => clearInterval(interval); // Clean up the interval on unmount
+  }, [fMessages]);
+
+
+
+
+
+
+
+
+
+
+
 
   const fetchRating = async () => {
     try {
@@ -35,6 +93,9 @@ const R = () => {
         console.error("Error fetching rating:", error);
     }
   };
+  useEffect(() => {
+    fetchRating();
+  }, []);
 
   const [inputMessage, setInputMessage] = useState("");
   const [typing, setTyping] = useState(false);
@@ -70,7 +131,19 @@ const R = () => {
     // Send message to ChatGPT and wait for a response
     await processMessageToChatGPT(newMessages);
   };
-
+  const [lolpies, setLolpies] = useState("");
+  const fetchMessages2 = async () => {
+    try {
+      const response = await fetch("/assets/MD_metadata.txt");
+      const text9 = await response.text();
+      setLolpies(text9);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+  useEffect(() => {
+    fetchMessages2();
+  }, []);
   async function processMessageToChatGPT(chatMessages) {
     let apiMessages = chatMessages.map((messageObject) => {
       let role = messageObject.sender === "ChatGPT" ? "assistant" : "user";
@@ -84,6 +157,9 @@ const R = () => {
         Explain all concepts like I am 10 years old.
       `,
     };
+    
+
+    
 
     const apiRequestBody = {
       model: "gpt-3.5-turbo",
@@ -111,7 +187,10 @@ const R = () => {
         setTyping(false);
         setIsSending(false);
       });
+    
   }
+
+  
 
   return (
     <div className="relative min-h-screen overflow-y-hidden no-scrollbar text-white antialiased selection:bg-rose-300 selection:text-rose-800">
@@ -134,30 +213,11 @@ const R = () => {
           <div className="flex items-center justify-center mb-10">
             <DoctorEfficiencyBar efficiency={doctorEfficiency} />
           </div>
-          <div className="flex justify-center items-center mt-32">
-            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
-              Updated Patient History
-            </span>
+          <div className="items-center justify-center align-middle relative left-[6rem]">
+            <textarea className="w-3/4 h-[15rem] flex items-center justify-center resize-none p-0 text-center align-middle rounded-[1.25rem] text-black" value={lolpies}>
+              
+            </textarea>
           </div>
-          <div className = "flex flex-col items-center justify-center mt-[50px] mb-[140px]">
-              <div className = "flex items-center justify-center bg-blue-500 rounded-full mx-[140px]">
-                <span className = "py-4 px-6 text-white text-center">Hey there! Please click the button below to receive your updated patient history information.</span>
-              </div>
-              {/* <input
-                type="file"
-                ref={fileInputRef} // Attach the ref here
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-                directory="false"
-              /> */}
-              <button className = "hover:opacity-50 ease-in-out duration-300 hover:scale-150">
-                <img
-                    src = {patientHistory}
-                    alt = "Patient History Form"
-                    className = "ml-8 w-[220px] h-[240px] relative top-[50px] z-10"
-                />
-              </button>      
-            </div> 
         </div>
         <div className="w-1/2 border-r-[2px] border-l-[2px] border-red-500 border-b-[2px]">
         <div className = "mt-[125px]">
@@ -169,7 +229,7 @@ const R = () => {
           <div className="flex items-center justify-center mb-10">
             <div className="box-border h-[360px] w-[600px] border-[4px] border-blue-400 hover:border-blue-600 transition-all hover:shadow-2xl hover:shadow-blue-600 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-white flex">
               <div className="overflow-y-auto p-4">
-                {messages.map((message, index) => (
+                {fmessages.map((message, index) => (
                   <div
                     key={index}
                     className={`flex mb-4 ${
@@ -185,7 +245,7 @@ const R = () => {
                           : "text-blue"
                       } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                     >
-                      bro
+                      {message.message}
                     </div>
                   </div>
                 ))}
