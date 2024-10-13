@@ -7,6 +7,7 @@ import shutil
 from flask import jsonify
 import whisperMD
 import extractDoc
+import postAnalysis
 from langchain.schema import HumanMessage, AIMessage
 from langchain_community.chat_models import ChatOpenAI
 app = Flask(__name__)
@@ -47,12 +48,10 @@ def upload_files():
     extractDoc.metadata()
     
     return 'Files uploaded successfully', 200
-    
-@app.route('/red2', methods=['GET'])
+# use this after leaving the main medication / diagnosis error screen when you have full transcript.
+@app.route('/panalysis', methods=['POST'])
 def ty111():
-    lol = ty() 
-    print(lol)    # This will now only run when the '/red2' endpoint is accessed.
-    return "Just say HI"
+    postAnalysis.refine()
 
 
 @app.route('/MD', methods=['POST'])

@@ -16,7 +16,6 @@ import spc
 import json
 
 
-
 load_dotenv()
 
 api_key = os.getenv("OPENAI_API_KEY")
@@ -105,9 +104,43 @@ def contradiction_analysis():
 
             file.write("The patient's transcription contained 3 or more contradictions, so you may want to run through their exact problem step by step with them." + "\n")
 
+def improve():
+    transcript_path = './assets/MD_full.txt'
+    with open(transcript_path, 'r') as file:
+        text_content = file.read()
+        
+    url = 'https://api.openai.com/v1/chat/completions'
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + api_key
+    }
+    
+    data = {
+        "model": "gpt-4o-mini",
+        "messages": [
+            {"role": "system", "content": "You will be given a full transcript of a conversation between a doctor and a patient. Please analyze the transcript and return a single sentence that summarized one thing the doctor could have done better during this encounter to have made a better experience in terms of patient safety. Please respond with a sentence no longer than 10 words that summarizes one thing the doctor could improve on next time that could lead to better patient safety in regards to the context of the transcript provided."},
+            {"role": "user", "content": "This is the transcript of the conversation: " + text_content},
+        ],
+        "temperature": 0.7
+    }
+    response = requests.post(url, headers=headers, json=data)
+    
+    # Print the response for debugging purposes
+    print(f"API Response: {response.json()}")
+
+    # Safely handle missing keys
+    response_json = response.json()
+    if 'choices' in response_json:
+        tt = response_json['choices'][0]['message']['content']
+        with open('./assets/improvement.txt', 'a') as file:
+            file.write(tt + "\n")
+
+
 def refine():
     mainAnalysis()
     contradiction_analysis()
+    improve()
+    
     
 if __name__ == "__main__":
     refine()
