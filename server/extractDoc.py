@@ -2,32 +2,12 @@ import requests
 import fitz  # PyMuPDF
 import os
 from dotenv import load_dotenv 
-<<<<<<< HEAD
-=======
 
 load_dotenv()
->>>>>>> 2c6f7b8 (j)
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
-<<<<<<< HEAD
-
-
-def metadata():
-    pdf_document = "./uploaded_files/filled_doc.pdf"  # SWITCH FOR PDF THAT WAS ENTERED IN THE FRONTEND
-    document = fitz.open(pdf_document)
-
-    all_text = ""
-    # Extract text from each page
-    for page_num in range(document.page_count):
-        page = document.load_page(page_num)  # Load page
-        text = page.get_text()  # Extract text
-        all_text += f"{text}\n"
-
-    # Close the document when done
-    document.close()
-=======
 # Open the PDF file
 def extract_text_from_pdf(pdf_doc_path):
     document = fitz.open(pdf_doc_path)
@@ -46,7 +26,6 @@ def extract_text_from_pdf(pdf_doc_path):
 def transcribe_and_organize_patient_data(pdf_doc_path : str):
     """Reads document and sends JSON"""
     doc_in_str = extract_text_from_pdf(pdf_doc_path)
->>>>>>> 2c6f7b8 (j)
     url = 'https://api.openai.com/v1/chat/completions'
     headers = {
         "Content-Type": "application/json",
@@ -70,12 +49,4 @@ def transcribe_and_organize_patient_data(pdf_doc_path : str):
         return data
     else:
         print(f"Error: 'choices' not found in the response: {response_json}")
-<<<<<<< HEAD
-        return "Error: Unable to retrieve metadata"
     
-
-if __name__ == "__main__":
-    metadata()
-=======
-    
->>>>>>> 2c6f7b8 (j)
