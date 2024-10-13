@@ -202,7 +202,7 @@ const CE = () => {
 
   const stopServer = async () => {
     try {
-        const response = await fetch("http://localhost:5000/stp", { // Use the correct server URL and port
+        const response = await fetch("http://localhost:5173/stp", { // Use the correct server URL and port
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -248,7 +248,7 @@ const CE = () => {
             </button>
           </div>
           <Link
-            
+            onClick={stopServer}
             className="w-[380px] h-[380px] rounded-full bg-transparent transition duration-200 z-4 absolute left-[198px] bottom-[353px]"
           ></Link>
           <div className="flex items-center justify-center absolute top-[900px] left-[180px]">

@@ -1,5 +1,125 @@
-  Hello, doctor.  this past week I have been feeling feeble and  whenever I bang my head against the wall, it starts to
-  bleed. Wow.  You sound like a smart person.  I am diagnosing you with  with leukemia.  How do you know that I have leukemia?
-  Because I know everything  And I honestly think that I am  I'm going to prescribe you heroin.  today as your medication for
-  leukemia What should my  dosage be, and how frequently should I be taking it?  Your dosage is going to be
-  once every day.  and that should also  take care of how many times you should take it.  How much should I be taking with me?
+Here is the organized transcription of the provided medical history form:
+
+**Patient Information:**
+- Full Name: John Doe
+- Date: 04/23/1985
+- Birth Date: 04/23/1985
+- Age: 39
+
+**Allergies:**
+- Patient's allergies: Penicillin (Rash, Swelling), Pollen (Sneezing, Itchy Eyes)
+
+**Medications:**
+- Patient's medications: Ibuprofen (1 time per day, 200 mg), Lisinopril (3 times per day, 10 mg), Metformin (2 times per day, 500 mg)
+
+**Health Maintenance Screening Test History:**
+- Cholesterol: Date: 01/15/2024, Facility/Provider: Health Clinic, Abnormal Result? N
+- Colonoscopy/Sigmoid: Date: 12/10/2023, Facility/Provider: City Hospital, Abnormal Result? N
+- Mammogram: Date: 09/10/2023, Facility/Provider: Health Wellness, Abnormal Result? N
+- Pap Smear: Date: 11/08/2020, Facility/Provider: , Abnormal Result? N
+- Bone Density: Date: 04/12/2022, Facility/Provider: , Abnormal Result? N
+- Last Tetanus Booster or TdaP: 12/10/2021
+- Last Pneumovax (Pneumonia): 07/21/2022
+- Last Flu Vaccine: 10/05/2023
+- Last Prevnar: 
+- Last Zoster Vaccine (Shingles): 
+
+**Personal Medical History:**
+- Alcoholism/Drug Abuse: Yes
+- Asthma: Yes (Controlled with medication)
+- Cancer: (type: )
+- Depression/Anxiety/Bipolar/Suicidal: Yes
+- Diabetes: (type: Diagnosed in 2020, on Metformin)
+- Emphysema (COPD): Yes (Mild, occasional use of inhaler)
+- Heart Disease: 
+- High Blood Pressure (hypertension): Yes (Under control with diet)
+- High Cholesterol: Yes
+- Hypothyroidism/Thyroid Disease: 
+- Renal (kidney) Disease: 
+- Migraine Headaches: Yes (Treated with pain relievers)
+- Stroke: 
+- Other: 
+- Other: 
+
+**Current Surgeries:**
+- Type: Appendectomy
+- Date: 03/10/2010
+- Location/Facility: General Hospital
+
+**Social History:**
+- Occupation: 
+- Employer: 
+- Years of Education or Highest Degree: 
+- Night Shift: N
+- Marital Status: 
+- Do you have children? Y
+- If yes, how many? 2
+
+**Family Medical History:**
+- No Significant Family History is Known
+
+**Other Health Issues:**
+- Tobacco Use: 
+  - Smoke Cigarettes? N
+  - Current: Packs/day: , # of Years: 
+  - Past: Quit Date: , Packs/day: , # of Years: 
+- Alcohol/Drug Abuse: 
+  - Do you drink alcohol? Y
+  - # of Drinks/week: 
+  - Do you use marijuana or recreational drugs? N
+  - Have you ever used needles to inject drugs? N
+  - Have you ever taken someone else’s drugs? N
+
+**Exercise:**
+- Do you exercise regularly? Y
+- What kind of exercise? 
+- Duration: How long (min.): , How often: 
+
+**Sexual Activity:**
+- Sexually involved currently? Y
+- Sexual partner(s): 
+- Birth control method: 
+
+**Advance Directive:**
+- Have you completed an Advance Directive for Health Care (ADHC), Living Will, or Physical Orders for Life Sustaining Therapy (POLST)? Y
+
+**Specialist Last Visit:**
+- Cardiology: 05/15/2024, Dr. Smith
+- Gastroenterologist (GI): 07/18/2023, Dr. Lee
+- OB/GYN: 02/10/2024, Dr. Garcia
+
+**Additional Information:**
+- Have you traveled outside of the country in the last 30 days? N
+- Have you served in the military? N
+
+**Sleep:**
+- Average sleep hours: 
+
+**Diet:**
+- How would you rate your diet? 
+- Would you like advice on your diet? 
+
+**Safety:**
+- Do you use a bike helmet? 
+- Do you use seat belts consistently? 
+- Working smoke detector in home? 
+- If you have guns at home, are they locked up? 
+- Is violence at home a concern for you? 
+
+**Review of Systems:**
+- Skin: 
+- Genitourinary: 
+- Cardiovascular: 
+- Muscular: 
+- Gastrointestinal: 
+- Endocrine: 
+- Constitution: 
+- Respiratory: 
+- Eyes: 
+- Head, Ear, Nose & Throat: 
+- Allergy/Immuno: 
+- Neurological: 
+- Hematologic: 
+- Psychiatric: 
+
+This transcription captures all the relevant information in an organized manner, making it easy to read and understand.

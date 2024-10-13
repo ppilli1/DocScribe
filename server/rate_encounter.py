@@ -39,11 +39,10 @@ def rate_transcript(factor):
     write_content = result.content
     return int(write_content)
 
-# Iterate through each factor and rate the transcript based on each one
-for factor in factors:
-    rating = rate_transcript(factor, ratings)
-    ratings.append(rating)
 
-# uses average to get a final rating
-final_rating = sum(ratings) / len(ratings)
-
+def ratingz():
+    for factor in factors:
+        rating = rate_transcript(factor, ratings)
+        ratings.append(rating)
+    final_rating = sum(ratings) / len(ratings)
+    return final_rating
