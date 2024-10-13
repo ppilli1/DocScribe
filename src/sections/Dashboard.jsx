@@ -39,6 +39,25 @@ const Dashboard = () => {
     }
   };
 
+
+  const handleRefineClick = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:5173/refine', null, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.status === 200) {
+        console.log('Refinement process started successfully');
+      } else {
+        console.error('Failed to start refinement process');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleFileChange = async (event) => {
     const files = event.target.files;
     const formData = new FormData();
@@ -165,6 +184,15 @@ const Dashboard = () => {
                       <MdArrowOutward />
                     </div>
                   </Link>
+                  <div>
+                    <button
+                      onClick={handleRefineClick}
+                      className="text-white bg-blue-700 hover:bg-blue-800 p-2 rounded-lg mt-4"
+                    >
+                      Refine
+                    </button>
+                  </div>
+
                 </div>
               </div>
             ))}

@@ -15,7 +15,9 @@ app = Flask(__name__)
 CORS(app, resources={r"/MD": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/OR": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/upload": {"origins": "http://localhost:5173"}})
-CORS(app, resources={r"/initialpdf": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/refine": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "http://localhost:5174"}}, supports_credentials=True)
 api_key = os.getenv("OPENAI_API_KEY")
 messages_red = []
 
@@ -49,10 +51,15 @@ def upload_files():
     
     return 'Files uploaded successfully', 200
 # use this after leaving the main medication / diagnosis error screen when you have full transcript.
-@app.route('/panalysis', methods=['POST'])
-def ty111():
-    postAnalysis.refine()
 
+
+@app.route('/refine', methods=['POST', 'OPTIONS'])
+def ty111():
+    if request.method == 'OPTIONS':
+        return jsonify({'status': 'success'}), 200
+    print("LOL")
+    postAnalysis.refine()
+    return "Refinement started", 200
 
 @app.route('/MD', methods=['POST'])
 def MD_logic():
