@@ -16,7 +16,7 @@ const R = () => {
         <div className = "flex flex-wrap mt-[100px]">
             <div className = "w-1/2">
                 <div className = "flex items-center justify-center">
-                    <div className = "h-[60px] w-[300px] border-[2px] border-red-500">
+                    <div className = "h-[60px] w-[300px] border-[2px] border-red-500 rounded-full">
                         <div className = "flex flex-col justify-center items-center">
                             Bro
                         </div>

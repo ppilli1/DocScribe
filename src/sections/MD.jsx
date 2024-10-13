@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import { FaArrowUp } from "react-icons/fa";
+import wavingHand from "../assets/wavingHand.gif";
 
 const MD = () => {
   const [messages, setMessages] = useState([
@@ -326,9 +327,9 @@ const MD = () => {
         </h3>
       </div>
       <div className="flex items-center justify-center">
-        <button 
-            className="w-[140px] h-[140px] border-[2px] border-red-500 rounded-full flex items-center justify-center bg-gradient-to-r from-black to-[#0713f5] overflow-hidden hover:opacity-80 transition-all duration-300 ease-in-out active:opacity-50"
-            onClick = {openModal}
+        <button
+          className="w-[140px] h-[140px] border-[2px] border-red-500 rounded-full flex items-center justify-center bg-gradient-to-r from-black to-[#0713f5] overflow-hidden hover:opacity-80 transition-all duration-300 ease-in-out active:opacity-50"
+          onClick={openModal}
         >
           Click Here <br /> to Send Your <br /> Question!!
         </button>
@@ -422,14 +423,21 @@ const MD = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-[1.25rem] p-6 w-[400px] h-[400px] flex flex-col">
-            <h2 className="text-2xl font-bold mb-4 text-black">Enter Your Question</h2>
-            <div className="flex-grow flex items-center justify-center">
-              <textarea
-                value={modalInput}
-                onChange={(e) => setModalInput(e.target.value)}
-                className="w-full h-32 p-2 border-[2px] border-gray-300 transition-colors duration-300 ease-in-out rounded-[1.25rem] resize-none text-black"
-                placeholder="Type your question here..."
-              />
+            {/* <div className = "flex justify-center items-center"> */}
+            <span className="text-red-500 text-center text-3xl font-bold">
+              ALERT!!!{" "}
+            </span>
+            <h2 className="text-2xl font-bold mb-4 text-black text-center">
+              A Question From Our System
+            </h2>
+            {/* </div> */}
+            <div className="flex-col flex items-center justify-center">
+              <div className="w-[80px] h-[80px]">
+                <img src={wavingHand} alt="Waving Hand" />
+              </div>
+              <div className="mt-4 w-full h-32 p-2 border-[2px] border-gray-300 rounded-[1.25rem] text-black overflow-auto">
+                What's Good
+              </div>
             </div>
             <div className="flex justify-end mt-4">
               <button
@@ -437,12 +445,6 @@ const MD = () => {
                 className="px-4 py-2 bg-gray-300 rounded-[1.25rem] mr-2 text-black"
               >
                 Cancel
-              </button>
-              <button
-                onClick={handleModalSubmit}
-                className="px-4 py-2 bg-blue-500 text-white rounded-[1.25rem]"
-              >
-                Submit
               </button>
             </div>
           </div>
