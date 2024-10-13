@@ -1,6 +1,5 @@
 import React from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
-<<<<<<< HEAD
 import { useState, useRef, useEffect } from "react";
 import DoctorEfficiencyBar from "../components/DoctorEfficiencyBar";
 import patientHistory from "../assets/medScribe.webp"
@@ -86,116 +85,6 @@ const R = () => {
             message: data.choices[0].message.content,
             sender: "ChatGPT",
             direction: "incoming",
-=======
-import {useState, useRef, useEffect, useCallback} from "react"
-
-const R = () => {
-    const [messages, setMessages] = useState([
-        {
-          message: "Here are some improvements that you as the doctor can make:",
-          sender: "ChatGPT",
-          direction: "incoming",
-        },
-      ]);
-    
-      const [inputMessage, setInputMessage] = useState("");
-      const [typing, setTyping] = useState(false);
-      const [isSending, setIsSending] = useState(false);
-      const messagesEndRef = useRef(null);
-      const [fetchedMessages, setFetchedMessages] = useState([]);
-      // Scroll to the bottom whenever messages change
-      useEffect(() => {
-        scrollToBottom();
-      }, [messages, typing]);
-    
-      const scrollToBottom = () => {
-        if (messagesEndRef.current) {
-          const chatbox = messagesEndRef.current.parentNode; 
-          chatbox.scrollTop = chatbox.scrollHeight; 
-        }
-      };
-
-      const fetchMessages = useCallback(async () => {
-        try {
-          const response = await fetch("/assets/improvement.txt"); // Fetch from public folder
-          const text = await response.text(); // Read the file contents as text
-          const newMessages = text.split("\n").filter(Boolean); // Split by line and filter empty lines
-    
-          // Only append messages that are new (not already in fetchedMessages)
-          const newUniqueMessages = newMessages.filter(
-            (msg) => !fetchedMessages.includes(msg)
-          );
-    
-          // Update the state with new unique messages
-          setFetchedMessages((prevFetchedMessages) => [
-            ...prevFetchedMessages,
-            ...newUniqueMessages,
-          ]);
-    
-          // Map new messages to the expected format and update the state
-          const formattedMessages = newUniqueMessages.map((msg) => ({
-            message: msg,
-            sender: "ChatGPT",
-            direction: "incoming",
-          }));
-    
-          setMessages((prevMessages) => [...prevMessages, ...formattedMessages]);
-        } catch (error) {
-          console.error("Error fetching messages:", error);
-        }
-      }, [fetchedMessages]);
-    
-      useEffect(() => {
-        const interval = setInterval(() => {
-          fetchMessages();
-        }, 1000);
-    
-        return () => clearInterval(interval); // Clean up the interval on unmount
-      }, [fetchMessages])
-    
-      const handleSend = async () => {
-        if (!inputMessage.trim()) return;
-    
-        const newMessage = {
-          message: inputMessage,
-          sender: "user",
-          direction: "outgoing",
-        };
-    
-        const newMessages = [...messages, newMessage];
-        setMessages(newMessages);
-        setInputMessage("")
-        setIsSending(false);
-        setTyping(true);
-        // Send message to ChatGPT and wait for a response
-        await processMessageToChatGPT(newMessages);
-      };
-    
-      async function processMessageToChatGPT(chatMessages) {
-        let apiMessages = chatMessages.map((messageObject) => {
-          let role = messageObject.sender === "ChatGPT" ? "assistant" : "user";
-          return { role: role, content: messageObject.message };
-        });
-    
-        // System message with personal info and instructions
-        const systemMessage = {
-          role: "system",
-          content: `
-            Explain all concepts like I am 10 years old.
-          `,
-        };
-    
-        const apiRequestBody = {
-          model: "gpt-3.5-turbo",
-          messages: [systemMessage, ...apiMessages],
-        };
-    
-        await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + API_KEY,
-            "Content-Type": "application/json",
->>>>>>> 92f89faac66741f179608647511746293334846f
           },
         ]);
         setTyping(false);
@@ -232,14 +121,8 @@ const R = () => {
             </span>
           </div>
           <div className="flex items-center justify-center mb-10">
-<<<<<<< HEAD
             <div className="box-border h-[360px] w-[600px] border-[4px] border-blue-400 hover:border-blue-600 transition-all hover:shadow-2xl hover:shadow-blue-600 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-white flex">
               <div className="overflow-y-auto p-4">
-=======
-          <div className="box-border h-[360px] w-[600px] border-[4px] border-blue-400 hover:border-blue-600 transition-all hover:shadow-2xl hover:shadow-blue-600 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-white flex items-center justify-center">
-              <div className = "flex items-center justify-center">
-                <div className="w-[25rem] h-[20rem] rounded-[1.25rem] left-[1.25rem] top-[1rem] resize-none text-black">
->>>>>>> 92f89faac66741f179608647511746293334846f
                 {messages.map((message, index) => (
                   <div
                     key={index}
@@ -256,22 +139,11 @@ const R = () => {
                           : "text-blue"
                       } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                     >
-<<<<<<< HEAD
                       bro
                     </div>
                   </div>
                 ))}
                 <div ref={messagesEndRef} />
-=======
-                      {/* PUT MESSAGE FOR MEDICATION ERROR */}
-                      {message.message}
-                    </div>
-                  </div>
-                ))}
-                  
-                  
-                </div>
->>>>>>> 92f89faac66741f179608647511746293334846f
               </div>
             </div>
           </div>
