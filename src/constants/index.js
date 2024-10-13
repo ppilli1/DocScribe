@@ -21,6 +21,7 @@ export const navigation = [
   export const NAVIGATION_LINKS = [
     { label: "Medications/Diagnosis", href: "MD" },
     { label: "Clinical Errors", href: "CE" },
+    { label: "Reports", href: "R"}
   ];
 
   export const NAVIGATION_LINK = [

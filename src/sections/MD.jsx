@@ -16,6 +16,19 @@ const MD = () => {
   const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalInput, setModalInput] = useState("");
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleModalSubmit = () => {
+    // Handle the submission of the modal input
+    console.log("User input:", modalInput);
+    setModalInput("");
+    closeModal();
+  };
+
   const fetchMessages = useCallback(async () => {
     try {
       const response = await fetch("../../assets/MD_medication_return.txt"); // Fetch from public folder
@@ -307,20 +320,28 @@ const MD = () => {
         <ParticlesBackground />
       </div>
       <div className="absolute -z-10 min-h-full w-full bg-gradient-to-r from-[#f0f9fd] to-[#65c0e7]"></div>
-      <div className="flex items-start justify-center">
+      <div className="flex items-start justify-center mb-10">
         <h3 className="uppercase tracking-[20px] text-blue-700 text-2xl mt-[120px] ml-6">
           Medications / Diagnosis
         </h3>
       </div>
-      <div className="flex flex-wrap mt-[100px] pb-20">
+      <div className="flex items-center justify-center">
+        <button 
+            className="w-[140px] h-[140px] border-[2px] border-red-500 rounded-full flex items-center justify-center bg-gradient-to-r from-black to-[#0713f5] overflow-hidden hover:opacity-80 transition-all duration-300 ease-in-out active:opacity-50"
+            onClick = {openModal}
+        >
+          Click Here <br /> to Send Your <br /> Question!!
+        </button>
+      </div>
+      <div className="flex flex-wrap mt-[-60px] pb-20">
         <div className="w-1/2">
-          <div className="flex justify-center items-center mb-10 ml-[90px] my-[18px]">
+          <div className="flex justify-center items-center mb-10 ml-[60px] my-[18px]">
             <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
               Medications
             </span>
           </div>
           <div className="flex justify-center ml-10">
-            <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/75 flex">
+            <div className="box-border h-[700px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/75 flex">
               <div className="overflow-y-auto p-4">
                 {messages.map((message, index) => (
                   <div
@@ -356,48 +377,77 @@ const MD = () => {
           </div>
         </div>
         <div className="w-1/2">
-          <div className="flex justify-center items-center mb-10 my-[18px] no-scrollbar">
+          <div className="flex justify-center items-center mb-10 my-[18px] no-scrollbar mr-8">
             <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
               Diagnosis
             </span>
           </div>
-          <div className = "flex justify-center mr-10">
-          <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/75 flex">
-            <div className="overflow-y-auto p-4">
-              {messages1.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex mb-4 ${
-                    message.direction === "incoming"
-                      ? "justify-start"
-                      : "hidden"
-                  }`}
-                >
+          <div className="flex justify-center mr-10">
+            <div className="box-border h-[700px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/75 flex">
+              <div className="overflow-y-auto p-4">
+                {messages1.map((message, index) => (
                   <div
-                    className={`${
+                    key={index}
+                    className={`flex mb-4 ${
                       message.direction === "incoming"
-                        ? "bg-blue-500 text-white"
-                        : "text-blue"
-                    } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
+                        ? "justify-start"
+                        : "hidden"
+                    }`}
                   >
-                    {/* PUT MESSAGE FOR DIAGNOSIS ERROR */}
-                    {message.message}
+                    <div
+                      className={`${
+                        message.direction === "incoming"
+                          ? "bg-blue-500 text-white"
+                          : "text-blue"
+                      } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
+                    >
+                      {/* PUT MESSAGE FOR DIAGNOSIS ERROR */}
+                      {message.message}
+                    </div>
                   </div>
-                </div>
-              ))}
-              {/* {typing && (
+                ))}
+                {/* {typing && (
                 <div className="flex justify-start mb-4">
                   <div className="bg-pink-500 text-white p-3 rounded-[1.25rem] max-w-xs shadow-lg">
                     ChatGPT is typing...
                   </div>
                 </div>
               )} */}
-              <div ref={messagesEndRef} />
+                <div ref={messagesEndRef} />
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-[1.25rem] p-6 w-[400px] h-[400px] flex flex-col">
+            <h2 className="text-2xl font-bold mb-4 text-black">Enter Your Question</h2>
+            <div className="flex-grow flex items-center justify-center">
+              <textarea
+                value={modalInput}
+                onChange={(e) => setModalInput(e.target.value)}
+                className="w-full h-32 p-2 border-[2px] border-gray-300 transition-colors duration-300 ease-in-out rounded-[1.25rem] resize-none text-black"
+                placeholder="Type your question here..."
+              />
+            </div>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-300 rounded-[1.25rem] mr-2 text-black"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleModalSubmit}
+                className="px-4 py-2 bg-blue-500 text-white rounded-[1.25rem]"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
