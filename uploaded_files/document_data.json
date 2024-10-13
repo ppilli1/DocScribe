@@ -1,0 +1,189 @@
+{
+  "patient_info": {
+    "full_name": "John Doe",
+    "date": "04/23/1985",
+    "birth_date": "04/23/1985",
+    "age": 39
+  },
+  "medical_history": {
+    "allergies": [
+      {
+        "allergic_reaction": "Rash, Swelling",
+        "substance": "Penicillin"
+      },
+      {
+        "allergic_reaction": "Sneezing, Itchy Eyes",
+        "substance": "Pollen"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Ibuprofen",
+        "times_per_day": 1,
+        "dose": "10mg"
+      },
+      {
+        "name": "Lisinopril",
+        "times_per_day": 3,
+        "dose": "200mg"
+      },
+      {
+        "name": "Metformin",
+        "times_per_day": 2,
+        "dose": "500mg"
+      }
+    ],
+    "health_maintenance_screening_test_history": {
+      "cholesterol": {
+        "date": "01/15/2024",
+        "facility_provider": "Health Clinic",
+        "abnormal_result": "N"
+      },
+      "colonoscopy_sigmoid": {
+        "date": "12/10/2023",
+        "facility_provider": "City Hospital",
+        "abnormal_result": "N"
+      },
+      "mammogram": {
+        "date": "11/08/2020",
+        "facility_provider": "",
+        "abnormal_result": "N"
+      },
+      "pap_smear": {
+        "date": "04/12/2022",
+        "facility_provider": "",
+        "abnormal_result": "N"
+      },
+      "bone_density": {
+        "date": "12/10/2021",
+        "facility_provider": "",
+        "abnormal_result": "N"
+      },
+      "last_tetanus_booster": "",
+      "last_pnuemovax": "",
+      "last_flu_vaccine": "",
+      "last_prevnar": "",
+      "last_zoster_vaccine": "10/05/2023"
+    }
+  },
+  "personal_medical_history": {
+    "current_conditions": {
+      "alcoholism_drug_abuse": "Yes",
+      "asthma": "Controlled with medication",
+      "cancer": "No",
+      "depression_anxiety_bipolar_suicidal": "Yes",
+      "diabetes": "Diagnosed in 2020, on Metformin",
+      "emphysema": "No",
+      "heart_disease": "No",
+      "high_blood_pressure": "Yes",
+      "high_cholesterol": "Yes",
+      "hypothyroidism": "No",
+      "renal_disease": "No",
+      "migraine_headaches": "Yes",
+      "stroke": "No"
+    },
+    "past_surgeries": [
+      {
+        "type": "Appendectomy",
+        "date": "03/10/2010",
+        "location": "General Hospital"
+      }
+    ]
+  },
+  "social_history": {
+    "family_medical_history": "No Significant Family History is Known",
+    "occupation": "Retired",
+    "employer": "",
+    "years_of_education": "",
+    "night_shift": "N",
+    "marital_status": "Single",
+    "children": {
+      "has_children": "Y",
+      "number": 2
+    }
+  },
+  "other_health_issues": {
+    "tobacco_use": {
+      "current": {
+        "smoke_cigarettes": "N",
+        "packs_per_day": "",
+        "years": ""
+      },
+      "past": {
+        "quit_date": "",
+        "packs_per_day": "",
+        "years": ""
+      }
+    },
+    "alcohol_drug_use": {
+      "drinks_per_week": "",
+      "marijuana_use": "N",
+      "needle_use": "N",
+      "taking_others_drugs": "N"
+    },
+    "exercise": {
+      "regular_exercise": "Y",
+      "type": "",
+      "duration": {
+        "minutes": "",
+        "frequency": ""
+      }
+    },
+    "sexual_activity": {
+      "currently_involved": "Y",
+      "partner_gender": "Male",
+      "birth_control_method": "None"
+    },
+    "advance_directive": "N"
+  },
+  "specialist_visits": [
+    {
+      "name": "Dr. Smith",
+      "last_visit": "05/15/2024"
+    },
+    {
+      "name": "Dr. Lee",
+      "last_visit": "07/18/2023"
+    },
+    {
+      "name": "Dr. Garcia",
+      "last_visit": "02/10/2024"
+    }
+  ],
+  "additional_information": {
+    "traveled_outside_country": "N",
+    "military_service": {
+      "served": "N"
+    },
+    "sleep": {
+      "average_hours": ""
+    },
+    "diet": {
+      "rating": "Good",
+      "advice_needed": "N"
+    },
+    "safety": {
+      "bike_helmet": "N",
+      "seat_belts": "Y",
+      "smoke_detector": "Y",
+      "guns_locked": "Y",
+      "violence_concern": "N"
+    }
+  },
+  "review_of_systems": {
+    "skin": [],
+    "genitourinary": [],
+    "cardiovascular": [],
+    "muscular": [],
+    "gastrointestinal": [],
+    "endocrine": [],
+    "constitution": [],
+    "respiratory": [],
+    "eyes": [],
+    "head_ear_nose_throat": [],
+    "allergy_immuno": [],
+    "neurological": [],
+    "hematologic": [],
+    "psychiatric": []
+  }
+}

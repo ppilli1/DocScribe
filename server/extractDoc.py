@@ -1,11 +1,13 @@
 import requests
 import fitz  # PyMuPDF
 import os
+from dotenv import load_dotenv 
 
+load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
 # Open the PDF file
-pdf_document = "filled_doc.pdf"  # SWITCH FOR PDF THAT WAS ENTERED IN THE FRONTEND
+pdf_document = "./uploaded_files/filled_doc.pdf"  # SWITCH FOR PDF THAT WAS ENTERED IN THE FRONTEND
 document = fitz.open(pdf_document)
 
 all_text = ""
