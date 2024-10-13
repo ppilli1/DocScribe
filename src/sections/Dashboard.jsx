@@ -44,6 +44,15 @@ const Dashboard = () => {
       console.error('fileInputRef is not attached to the input element');
     }
   };
+  const handleClick_md = async () => {
+    const response = await fetch('http://127.0.0.1:5173/MD', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    });
+  };
 
 
   const handleRefineClick = async () => {
@@ -128,6 +137,7 @@ const Dashboard = () => {
                   <Link
                     to = "/MD"
                     className={project.buttonClassName}
+                    onClick={handleClick_md}
                   >
                     <div className="z-10 flex items-center">
                       <span className="2xl:text-[1.125rem] xl:text-sm lg:text-[1rem] md:text-sm sm:text-[1rem] text-sm font-light tracking-tight">

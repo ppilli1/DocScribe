@@ -3,3 +3,5 @@ No diagnosis made.
 No diagnosis made.
 Error in diagnosis: Leukemia. No diagnosis made.
 Error in diagnosis: Jumping to conclusions without proper evaluation.
+No diagnosis errors found in the provided medical history form.
+No diagnosis errors detected in the conversation.

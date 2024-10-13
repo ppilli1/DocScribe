@@ -11,6 +11,7 @@ const MD = () => {
       direction: "incoming",
     },
   ])
+  
   const [messages, setMessages] = useState([
     {
       message: "Any Medication Errors?",
@@ -159,11 +160,11 @@ const fetchPatientQuestion = useCallback(async () => {
 
               // Call handleNewContent only when the first message changes
               handleNewContent();
-              console.log("Updated lolsies with new first line:", newFirstMessage);
+              
 
               return [initialMessage];
           } else {
-              console.log("First line unchanged, handleNewContent not called.");
+              
               return prevLolsies;
           }
       });

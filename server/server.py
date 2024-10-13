@@ -16,6 +16,7 @@ CORS(app, resources={r"/MD": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/OR": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/upload": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/refine": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/stp": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5174"}}, supports_credentials=True)
 api_key = os.getenv("OPENAI_API_KEY")
@@ -64,7 +65,7 @@ def ty111():
 @app.route('/MD', methods=['POST'])
 def MD_logic():
     print("MD logic executed successfully")
-    whisperMD.main2()
+    whisperMD.main()
     return jsonify({"message": "MD logic executed successfully"}), 200
 
 
