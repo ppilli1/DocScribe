@@ -1,6 +1,6 @@
 import React from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
-import {useState, useRef, useEffect} from "react"
+import {useState, useRef, useEffect, useCallback} from "react"
 
 const R = () => {
     const [messages, setMessages] = useState([
@@ -15,7 +15,7 @@ const R = () => {
       const [typing, setTyping] = useState(false);
       const [isSending, setIsSending] = useState(false);
       const messagesEndRef = useRef(null);
-    
+      const [fetchedMessages, setFetchedMessages] = useState([]);
       // Scroll to the bottom whenever messages change
       useEffect(() => {
         scrollToBottom();
@@ -27,6 +27,44 @@ const R = () => {
           chatbox.scrollTop = chatbox.scrollHeight; 
         }
       };
+
+      const fetchMessages = useCallback(async () => {
+        try {
+          const response = await fetch("/assets/improvement.txt"); // Fetch from public folder
+          const text = await response.text(); // Read the file contents as text
+          const newMessages = text.split("\n").filter(Boolean); // Split by line and filter empty lines
+    
+          // Only append messages that are new (not already in fetchedMessages)
+          const newUniqueMessages = newMessages.filter(
+            (msg) => !fetchedMessages.includes(msg)
+          );
+    
+          // Update the state with new unique messages
+          setFetchedMessages((prevFetchedMessages) => [
+            ...prevFetchedMessages,
+            ...newUniqueMessages,
+          ]);
+    
+          // Map new messages to the expected format and update the state
+          const formattedMessages = newUniqueMessages.map((msg) => ({
+            message: msg,
+            sender: "ChatGPT",
+            direction: "incoming",
+          }));
+    
+          setMessages((prevMessages) => [...prevMessages, ...formattedMessages]);
+        } catch (error) {
+          console.error("Error fetching messages:", error);
+        }
+      }, [fetchedMessages]);
+    
+      useEffect(() => {
+        const interval = setInterval(() => {
+          fetchMessages();
+        }, 1000);
+    
+        return () => clearInterval(interval); // Clean up the interval on unmount
+      }, [fetchMessages])
     
       const handleSend = async () => {
         if (!inputMessage.trim()) return;
@@ -121,8 +159,9 @@ const R = () => {
             </span>
           </div>
           <div className="flex items-center justify-center mb-10">
-          <div className="box-border h-[360px] w-[600px] border-[4px] border-blue-400 hover:border-blue-600 transition-all hover:shadow-2xl hover:shadow-blue-600 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-white flex">
-              <div className="overflow-y-auto p-4">
+          <div className="box-border h-[360px] w-[600px] border-[4px] border-blue-400 hover:border-blue-600 transition-all hover:shadow-2xl hover:shadow-blue-600 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-white flex items-center justify-center">
+              <div className = "flex items-center justify-center">
+                <div className="w-[25rem] h-[20rem] rounded-[1.25rem] left-[1.25rem] top-[1rem] resize-none text-black">
                 {messages.map((message, index) => (
                   <div
                     key={index}
@@ -140,18 +179,13 @@ const R = () => {
                       } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                     >
                       {/* PUT MESSAGE FOR MEDICATION ERROR */}
-                      bro
+                      {message.message}
                     </div>
                   </div>
                 ))}
-                {/* {typing && (
-                <div className="flex justify-start mb-4">
-                  <div className="bg-pink-500 text-white p-3 rounded-[1.25rem] max-w-xs shadow-lg">
-                    ChatGPT is typing...
-                  </div>
+                  
+                  
                 </div>
-              )} */}
-                <div ref={messagesEndRef} />
               </div>
             </div>
           </div>
