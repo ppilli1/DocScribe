@@ -12,18 +12,48 @@ from langchain_community.chat_models import ChatOpenAI
 from dotenv import load_dotenv 
 import sys
 import select
+<<<<<<< HEAD
+=======
+import time
+from extractDoc import transcribe_and_organize_patient_data
+
+
+>>>>>>> 2c6f7b8 (j)
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
 NEON_GREEN = '\033[32m'
 RESET_COLOR = '\033[0m'
+<<<<<<< HEAD
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 messages_medication = [HumanMessage(content = "You will receive data from a doctor-patient conversation. Analyze for any errors the doctor may have made in medication prescribed or advised. Only respond if an error occurs, with a statement of that error in 10 words or less. Do not mention any other issues.")]
 messages_diagnosis = [HumanMessage(content = "Analyze the following doctor-patient conversation for any errors related to diagnosis. Respond only if an error occurs, with a diagnosis error statement in 10 words or less. Focus solely on diagnosis and avoid mentioning other topics.")]
 messages_clarify = [HumanMessage(content = "Using the doctor-patient conversation context, identify any specific questions the doctor should ask for a clearer diagnosis. Only respond with one concise question for clarification, max 10 words. Do not mention other aspects.")]
 patient_questions = [HumanMessage(content = "Analyze the conversation and respond with one concise question the patient should ask the doctor, max 10 words. Focus solely on the patient’s perspective for better understanding. Do not include other topics. Only respond if this is a dire question the patient needs to ask, if it isn't, do not respond.")]
+=======
+
+
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
+# Patient data document transcription
+patient_data = transcribe_and_organize_patient_data("./uploaded_files/filled_doc.pdf")
+patient_data = patient_data if patient_data is not None else ""
+# append to full transcription file
+with open("./assets/MD_full.txt", 'w') as file:
+    file.write(patient_data)
+
+# also add to the top of ./assets/MD_full.txt
+messages_medication = [HumanMessage(content = "this is the start of the convo. You will get a bunch of data of what is happening in a conversation between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with medication prescribed or told the patient to take based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the data and only respond if you think there has been some sort of error medication related. your response should be very concise and only be a statement stating the error made with medication. If a medication was not prescribed, please respond with 'No medication prescribed.'")]
+messages_medication.append(HumanMessage(content=patient_data))
+messages_diagnosis = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with the diagnosis based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there has bees some sort of error diagnosis related. your response should be very concise and only be a statement stating the error made with diagnosis. If a diagnosis was not made, please respond with 'No diagnosis made.'")]
+messages_diagnosis.append(HumanMessage(content=patient_data))
+messages_clarify = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of questions that need to be clarified based on what the patient described as their problem or questions the doctor should ask to make a better diagnosis. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there is something the doctor should ask or clarify. Only respond with one question that you think should be asked or clarified and make sure it is concise.")]
+messages_clarify.append(HumanMessage(content=patient_data))
+patient_questions = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of questions that the patient asked that were not answered by the doctor. Do not reply to this message. Please just analyze the conversation and respond with a singular question that you think is good for the patient to ask for their own knowledge, such as 'what is the side effect of this medication?' Your response should be very concise and only be a statement of the question the patient should ask.")]
+patient_questions.append(HumanMessage(content=patient_data))
+>>>>>>> 2c6f7b8 (j)
 hundred_txt = ""
 hundred_txt_syn = ""
 
