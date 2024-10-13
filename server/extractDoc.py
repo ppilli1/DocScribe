@@ -6,21 +6,21 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
-# Open the PDF file
-pdf_document = "./uploaded_files/filled_doc.pdf"  # SWITCH FOR PDF THAT WAS ENTERED IN THE FRONTEND
-document = fitz.open(pdf_document)
 
-all_text = ""
-# Extract text from each page
-for page_num in range(document.page_count):
-    page = document.load_page(page_num)  # Load page
-    text = page.get_text()  # Extract text
-    all_text += f"{text}\n"
 
-# Close the document when done
-document.close()
+def metadata():
+    pdf_document = "./uploaded_files/filled_doc.pdf"  # SWITCH FOR PDF THAT WAS ENTERED IN THE FRONTEND
+    document = fitz.open(pdf_document)
 
-def metadata(all_text : str):
+    all_text = ""
+    # Extract text from each page
+    for page_num in range(document.page_count):
+        page = document.load_page(page_num)  # Load page
+        text = page.get_text()  # Extract text
+        all_text += f"{text}\n"
+
+    # Close the document when done
+    document.close()
     url = 'https://api.openai.com/v1/chat/completions'
     headers = {
         "Content-Type": "application/json",
@@ -51,4 +51,5 @@ def metadata(all_text : str):
         return "Error: Unable to retrieve metadata"
     
 
-metadata(all_text)
+if __name__ == "__main__":
+    metadata()

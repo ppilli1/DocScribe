@@ -118,7 +118,14 @@ const Dashboard = () => {
         </div>
         <div className = "w-1/3">
             <div className = "flex items-center justify-center">
-              <button className = "hover:opacity-50 ease-in-out duration-300 hover:scale-150">
+              <input
+                type="file"
+                ref={fileInputRef} // Attach the ref here
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+                directory="false"
+              />
+              <button className = "hover:opacity-50 ease-in-out duration-300 hover:scale-150" onClick={handleButtonClick}>
                 <img
                     src = {patientHistory}
                     alt = "Patient History Form"

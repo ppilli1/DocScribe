@@ -64,126 +64,139 @@
       "last_flu_vaccine": "",
       "last_prevnar": "",
       "last_zoster_vaccine": "10/05/2023"
-    }
-  },
-  "personal_medical_history": {
-    "current_conditions": {
-      "alcoholism_drug_abuse": "Yes",
-      "asthma": "Controlled with medication",
-      "cancer": "No",
-      "depression_anxiety_bipolar_suicidal": "Yes",
-      "diabetes": "Diagnosed in 2020, on Metformin",
-      "emphysema": "No",
-      "heart_disease": "No",
-      "high_blood_pressure": "Yes",
-      "high_cholesterol": "Yes",
-      "hypothyroidism": "No",
-      "renal_disease": "No",
-      "migraine_headaches": "Yes",
-      "stroke": "No"
     },
-    "past_surgeries": [
-      {
-        "type": "Appendectomy",
-        "date": "03/10/2010",
-        "location": "General Hospital"
-      }
-    ]
-  },
-  "social_history": {
-    "family_medical_history": "No Significant Family History is Known",
-    "occupation": "Retired",
-    "employer": "",
-    "years_of_education": "",
-    "night_shift": "N",
-    "marital_status": "Single",
-    "children": {
-      "has_children": "Y",
-      "number": 2
-    }
-  },
-  "other_health_issues": {
-    "tobacco_use": {
+    "disease_condition": {
       "current": {
-        "smoke_cigarettes": "N",
-        "packs_per_day": "",
-        "years": ""
+        "alcoholism_drug_abuse": "Yes",
+        "asthma": "Controlled with medication",
+        "cancer": "No",
+        "depression_anxiety_bipolar_suicidal": "Yes",
+        "diabetes": "Diagnosed in 2020, on Metformin",
+        "emphysema": "No",
+        "heart_disease": "No",
+        "high_blood_pressure": "Yes",
+        "high_cholesterol": "Yes",
+        "hypothyroidism": "No",
+        "renal_disease": "No",
+        "migraine_headaches": "Treated with pain relievers",
+        "stroke": "No",
+        "other": ""
       },
       "past": {
-        "quit_date": "",
-        "packs_per_day": "",
-        "years": ""
+        "surgeries": [
+          {
+            "type": "Appendectomy",
+            "date": "03/10/2010",
+            "location_facility": "General Hospital"
+          }
+        ]
       }
     },
-    "alcohol_drug_use": {
-      "drinks_per_week": "",
-      "marijuana_use": "N",
-      "needle_use": "N",
-      "taking_others_drugs": "N"
+    "social_history": {
+      "occupation": "",
+      "employment_status": {
+        "retired": false,
+        "unemployed": false,
+        "loa": false,
+        "disabled": false
+      },
+      "employer": "",
+      "years_of_education": "",
+      "night_shift": {
+        "works_night_shift": false
+      },
+      "marital_status": "Single",
+      "children": {
+        "has_children": true,
+        "number_of_children": 2
+      },
+      "family_medical_history": "No Significant Family History is Known"
     },
-    "exercise": {
-      "regular_exercise": "Y",
-      "type": "",
-      "duration": {
-        "minutes": "",
-        "frequency": ""
+    "other_health_issues": {
+      "tobacco_use": {
+        "smoke_cigarettes": false,
+        "current": {
+          "packs_per_day": "",
+          "years": ""
+        },
+        "past": {
+          "quit_date": "",
+          "packs_per_day": "",
+          "years": ""
+        },
+        "other_tobacco": []
+      },
+      "alcohol_drug_use": {
+        "drinks_alcohol": true,
+        "types": ["Beer", "Wine", "Liquor"],
+        "drinks_per_week": ""
+      },
+      "exercise": {
+        "exercises_regularly": true,
+        "type": "",
+        "duration": {
+          "minutes": "",
+          "frequency": ""
+        }
+      },
+      "sexual_activity": {
+        "sexually_involved": true,
+        "partners": ["Male"],
+        "birth_control_method": "None"
+      },
+      "advance_directive": {
+        "completed": true
       }
     },
-    "sexual_activity": {
-      "currently_involved": "Y",
-      "partner_gender": "Male",
-      "birth_control_method": "None"
+    "specialist_visits": [
+      {
+        "name": "Dr. Smith",
+        "last_visit": "05/15/2024"
+      },
+      {
+        "name": "Dr. Lee",
+        "last_visit": "07/18/2023"
+      },
+      {
+        "name": "Dr. Garcia",
+        "last_visit": "02/10/2024"
+      }
+    ],
+    "additional_information": {
+      "traveled_outside_country": false,
+      "military_service": {
+        "served": false
+      },
+      "sleep": {
+        "average_hours": ""
+      },
+      "diet": {
+        "rating": "Good",
+        "advice_needed": false
+      },
+      "safety": {
+        "bike_helmet": false,
+        "seat_belts": true,
+        "smoke_detector": true,
+        "guns_locked": false,
+        "violence_concern": false
+      }
     },
-    "advance_directive": "N"
-  },
-  "specialist_visits": [
-    {
-      "name": "Dr. Smith",
-      "last_visit": "05/15/2024"
-    },
-    {
-      "name": "Dr. Lee",
-      "last_visit": "07/18/2023"
-    },
-    {
-      "name": "Dr. Garcia",
-      "last_visit": "02/10/2024"
+    "review_of_systems": {
+      "skin": [],
+      "genitourinary": [],
+      "cardiovascular": [],
+      "muscular": [],
+      "gastrointestinal": [],
+      "endocrine": [],
+      "constitution": [],
+      "respiratory": [],
+      "eyes": [],
+      "head_ear_nose_throat": [],
+      "allergy_immuno": [],
+      "neurological": [],
+      "hematologic": [],
+      "psychiatric": []
     }
-  ],
-  "additional_information": {
-    "traveled_outside_country": "N",
-    "military_service": {
-      "served": "N"
-    },
-    "sleep": {
-      "average_hours": ""
-    },
-    "diet": {
-      "rating": "Good",
-      "advice_needed": "N"
-    },
-    "safety": {
-      "bike_helmet": "N",
-      "seat_belts": "Y",
-      "smoke_detector": "Y",
-      "guns_locked": "Y",
-      "violence_concern": "N"
-    }
-  },
-  "review_of_systems": {
-    "skin": [],
-    "genitourinary": [],
-    "cardiovascular": [],
-    "muscular": [],
-    "gastrointestinal": [],
-    "endocrine": [],
-    "constitution": [],
-    "respiratory": [],
-    "eyes": [],
-    "head_ear_nose_throat": [],
-    "allergy_immuno": [],
-    "neurological": [],
-    "hematologic": [],
-    "psychiatric": []
   }
 }

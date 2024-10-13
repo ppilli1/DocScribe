@@ -6,7 +6,7 @@ import json
 import shutil
 from flask import jsonify
 import whisperMD
-
+import extractDoc
 from langchain.schema import HumanMessage, AIMessage
 from langchain_community.chat_models import ChatOpenAI
 app = Flask(__name__)
@@ -14,11 +14,11 @@ app = Flask(__name__)
 CORS(app, resources={r"/MD": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/OR": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/upload": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/initialpdf": {"origins": "http://localhost:5173"}})
 api_key = os.getenv("OPENAI_API_KEY")
 messages_red = []
 
-
-
+    
 
 @app.route('/upload', methods=['POST'])
 def upload_files():
@@ -44,7 +44,7 @@ def upload_files():
         file.save(os.path.join(full_path, file.filename))
         print(f'File {file.filename} uploaded successfully to {full_path}')
     
-    
+    extractDoc.metadata()
     
     return 'Files uploaded successfully', 200
     
