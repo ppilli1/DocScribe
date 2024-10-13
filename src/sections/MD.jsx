@@ -320,7 +320,7 @@ const MD = () => {
             </span>
           </div>
           <div className="flex justify-center ml-10">
-            <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/50 flex">
+            <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/75 flex">
               <div className="overflow-y-auto p-4">
                 {messages.map((message, index) => (
                   <div
@@ -362,7 +362,7 @@ const MD = () => {
             </span>
           </div>
           <div className = "flex justify-center mr-10">
-          <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/50 flex">
+          <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/25 hover:bg-white/75 flex">
             <div className="overflow-y-auto p-4">
               {messages1.map((message, index) => (
                 <div

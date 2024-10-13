@@ -11,7 +11,7 @@ const Header = () => {
     <div className="bg-transparent">
       <nav className="fixed left-0 right-0 top-4 z-50">
         {/* Desktop Menu */}
-        <div className="mx-auto hidden max-w-3xl items-center justify-center rounded-lg border border-slate-50/30 bg-black/20 py-3 backdrop-blur-lg lg:flex">
+        <div className="mx-auto hidden max-w-2xl items-center justify-center rounded-lg border border-slate-50/30 bg-black/20 py-3 backdrop-blur-lg lg:flex">
           <div className="flex items-center justify-between gap-2">
             {/* <div> */}
             <Link
