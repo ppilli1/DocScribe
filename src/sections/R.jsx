@@ -5,7 +5,7 @@ import {useState, useRef, useEffect} from "react"
 const R = () => {
     const [messages, setMessages] = useState([
         {
-          message: "Here are some improvements that you as the doctor can make.",
+          message: "Here are some improvements that you as the doctor can make:",
           sender: "ChatGPT",
           direction: "incoming",
         },
@@ -140,7 +140,7 @@ const R = () => {
                       } p-3 rounded-[1.25rem] max-w-lg shadow-lg`}
                     >
                       {/* PUT MESSAGE FOR MEDICATION ERROR */}
-                      {message.message}
+                      bro
                     </div>
                   </div>
                 ))}
