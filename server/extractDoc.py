@@ -32,7 +32,7 @@ def transcribe_and_organize_patient_data(pdf_doc_path : str):
     data = {
         "model": "gpt-4o-mini",
         "messages": [
-            {"role": "system", "content": "can you analyze each page of the document. Each form, and transcribe it and then write it in an organized way in which can be read as a string? (example: Patient's allergies: Pollen, Penicillin. Patient's medications: Ibuprofen, Metmorfin)"},
+            {"role": "system", "content": "can you analyze each page of the document. Each form, and transcribe it and then write it in an organized way in which can be read as a string? (example: Patient's allergies: Pollen, Penicillin. Patient's medications: Ibuprofen, Metmorfin). Leave empty fields empty"},
             {"role": "user", "content": doc_in_str}
         ],
         "temperature": 0
