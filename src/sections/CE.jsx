@@ -101,7 +101,7 @@ const CE = () => {
   // Fetch New Messages (unchanged)
   const fetchMessages2 = useCallback(async () => {
     try {
-      const response = await fetch("../../assets/MD_question_return.txt");
+      const response = await fetch("/assets/refined_questions.txt");
       const text2 = await response.text();
       const newMessages = text2.split("\n").filter(Boolean);
 
@@ -199,6 +199,28 @@ const CE = () => {
       });
   }
 
+
+  const stopServer = async () => {
+    try {
+        const response = await fetch("http://localhost:5000/stp", { // Use the correct server URL and port
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to stop the server.");
+        }
+
+        const result = await response.text();
+        console.log("Server stopped successfully:", result);
+    } catch (error) {
+        console.error("Error stopping the server:", error);
+    }
+  };
+
+
   return (
     <div className="relative min-h-screen overflow-y-hidden no-scrollbar text-white antialiased selection:bg-rose-300 selection:text-rose-800">
       <div className="fixed top-0 -z-5 h-full w-full">
@@ -216,22 +238,22 @@ const CE = () => {
           {/* Ensure background is transparent */}
           {/* Spline Embed */}
           <div className="h-2/4 z-3 relative bottom-[-10rem]">
-            <Link to="/PG">
+            <button className="h-[33rem] w-[33rem] z-3 relative bottom-[3rem] left-[8.5rem]" onClick={stopServer}>
               <iframe
                 src="https://my.spline.design/cno1bottomcta-d2852393649091d6e5ee5337aaf2ebec/"
                 frameBorder="0"
                 width="100%"
                 height="100%"
               ></iframe>
-            </Link>
+            </button>
           </div>
           <Link
-            to="/PG"
+            
             className="w-[380px] h-[380px] rounded-full bg-transparent transition duration-200 z-4 absolute left-[198px] bottom-[353px]"
           ></Link>
           <div className="flex items-center justify-center absolute top-[900px] left-[180px]">
             <Link
-              to="/PG"
+              to="/R"
               className="text-5xl my-custom-font font-[40px] tracking-tighter text-fuchsia-500 z-3 transition-colors hover:text-fuchsia-700 duration-300 ease-in-out"
             >
               Next Steps

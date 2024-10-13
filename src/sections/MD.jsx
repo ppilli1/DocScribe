@@ -4,6 +4,13 @@ import { FaArrowUp } from "react-icons/fa";
 import wavingHand from "../assets/wavingHand.gif";
 
 const MD = () => {
+  const [lolsies, setLolsies] = useState([
+    {
+      message: "N/A",
+      sender: "ChatGPT89",
+      direction: "incoming",
+    },
+  ])
   const [messages, setMessages] = useState([
     {
       message: "Any Medication Errors?",
@@ -12,6 +19,7 @@ const MD = () => {
     },
   ]);
   const [fetchedMessages, setFetchedMessages] = useState([]);
+  const [fetchedMessagesp, setFetchedMessagesp] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [typing, setTyping] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -20,8 +28,8 @@ const MD = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalInput, setModalInput] = useState("");
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const handleModalSubmit = () => {
     // Handle the submission of the modal input
@@ -66,7 +74,128 @@ const MD = () => {
     }, 1000);
 
     return () => clearInterval(interval); // Clean up the interval on unmount
-  }, [fetchMessages]);
+  }, [fetchMessages])
+
+    // Functions to handle empty file and new content detection
+  const handleEmptyFile = useCallback(() => {
+    console.log("File is empty. Triggering empty file handler...");
+    closeModal();
+  }, [closeModal]);
+
+  const handleNewContent = useCallback(() => {
+      console.log("New content detected. Triggering new content handler...");
+      openModal();
+  }, [openModal]);
+
+
+
+
+  useEffect(() => {
+    // Separate function for initial loading of lolsies
+    const loadInitialLolsies = async () => {
+        try {
+            const response = await fetch("/assets/patient_question.txt");
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const text6 = await response.text();
+            const initialMessages = text6.split("\n").filter(Boolean);
+
+            console.log("Initial messages fetched:", initialMessages);
+
+            if (initialMessages.length > 0) {
+                const initialMessage = {
+                    message: initialMessages[0],
+                    sender: "ChatGPT",
+                    direction: "incoming",
+                };
+
+                setLolsies([initialMessage]);
+                setFetchedMessagesp(initialMessages);
+                handleNewContent(); // Open modal on initial non-empty file load
+            } else {
+                handleEmptyFile(); // Close modal if initially empty
+            }
+        } catch (error) {
+            console.error("Error fetching initial messages:", error);
+        }
+    };
+
+    loadInitialLolsies();
+
+    const interval = setInterval(fetchPatientQuestion, 1000);
+    return () => clearInterval(interval);
+}, []); // Empty dependency array to run only on mount
+
+const fetchPatientQuestion = useCallback(async () => {
+  try {
+      const response = await fetch("/assets/patient_question.txt");
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const text6 = await response.text();
+      const newMessages = text6.split("\n").filter(Boolean);
+
+      if (newMessages.length === 0) {
+          handleEmptyFile();
+          setLolsies([]);
+          return;
+      }
+
+      const newFirstMessage = newMessages[0];
+
+      // Use the updater function with setLolsies to access the latest state
+      setLolsies((prevLolsies) => {
+          const isDifferent = prevLolsies.length === 0 || prevLolsies[0].message !== newFirstMessage;
+
+          if (isDifferent) {
+              const initialMessage = {
+                  message: newFirstMessage,
+                  sender: "ChatGPT",
+                  direction: "incoming",
+              };
+
+              // Call handleNewContent only when the first message changes
+              handleNewContent();
+              console.log("Updated lolsies with new first line:", newFirstMessage);
+
+              return [initialMessage];
+          } else {
+              console.log("First line unchanged, handleNewContent not called.");
+              return prevLolsies;
+          }
+      });
+
+      const newUniqueMessages = newMessages.slice(1).filter(
+          (msg) => !fetchedMessagesp.includes(msg)
+      );
+
+      if (newUniqueMessages.length > 0) {
+          setFetchedMessagesp((prev) => [...prev, ...newUniqueMessages]);
+
+          const formattedMessages = newUniqueMessages.map((msg) => ({
+              message: msg,
+              sender: "ChatGPT",
+              direction: "incoming",
+          }));
+
+          setLolsies((prev) => [...prev, ...formattedMessages]);
+      }
+  } catch (error) {
+      console.error("Error fetching messages:", error);
+  }
+}, [fetchedMessagesp, handleEmptyFile, handleNewContent]);
+
+
+
+
+
+
+
+
+
 
   const [messages1, setMessages1] = useState([
     {
@@ -184,7 +313,7 @@ const MD = () => {
   // Fetch New Messages (unchanged)
   const fetchMessages2 = useCallback(async () => {
     try {
-      const response = await fetch("../../assets/MD_question_return.txt");
+      const response = await fetch("/assets/refined_questions.txt");
       const text2 = await response.text();
       const newMessages = text2.split("\n").filter(Boolean);
 
@@ -436,7 +565,7 @@ const MD = () => {
                 <img src={wavingHand} alt="Waving Hand" />
               </div>
               <div className="mt-4 w-full h-32 p-2 border-[2px] border-gray-300 rounded-[1.25rem] text-black overflow-auto">
-                What's Good
+                {lolsies[0].message}
               </div>
             </div>
             <div className="flex justify-end mt-4">

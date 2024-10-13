@@ -68,7 +68,10 @@ def MD_logic():
     return jsonify({"message": "MD logic executed successfully"}), 200
 
 
-
+@app.route("/stp", methods=['POST'])
+def stop():
+    with open("./assets/turn_off.txt", "w") as file:
+        file.write("1")
     
 
 
