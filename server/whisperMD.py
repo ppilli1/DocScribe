@@ -13,9 +13,7 @@ from dotenv import load_dotenv
 import sys
 import select
 import time
-from extractDoc import transcribe_and_organize_patient_data
-
-
+from extractDoc import patient_data
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -23,12 +21,8 @@ api_key = os.getenv("OPENAI_API_KEY")
 NEON_GREEN = '\033[32m'
 RESET_COLOR = '\033[0m'
 
-
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-# Patient data document transcription
-patient_data = transcribe_and_organize_patient_data("./uploaded_files/filled_doc.pdf")
-patient_data = patient_data if patient_data is not None else ""
 # append to full transcription file
 with open("./assets/MD_full.txt", 'w') as file:
     file.write(patient_data)

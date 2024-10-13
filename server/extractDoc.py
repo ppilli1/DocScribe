@@ -47,4 +47,6 @@ def transcribe_and_organize_patient_data(pdf_doc_path : str):
         return data
     else:
         print(f"Error: 'choices' not found in the response: {response_json}")
-    
+
+patient_data = transcribe_and_organize_patient_data("./uploaded_files/filled_doc.pdf")
+patient_data = patient_data if patient_data is not None else ""
