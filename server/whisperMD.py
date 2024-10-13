@@ -42,6 +42,7 @@ messages_clarify = [HumanMessage(content = "this is the start of the convo. You 
 messages_clarify.append(HumanMessage(content=patient_data))
 patient_questions = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of questions that the patient asked that were not answered by the doctor. Do not reply to this message. Please just analyze the conversation and respond with a singular question that you think is good for the patient to ask for their own knowledge, such as 'what is the side effect of this medication?' Your response should be very concise and only be a statement of the question the patient should ask.")]
 patient_questions.append(HumanMessage(content=patient_data))
+messages_facxtors = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of factors that may have been missed by the doctor in the diagnosis of the patient. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there is something the doctor should ask or clarify. Only respond with one factor that you think should be asked or clarified and make sure it is concise.")]
 hundred_txt = ""
 hundred_txt_syn = ""
 
