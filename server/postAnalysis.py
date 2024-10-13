@@ -118,7 +118,7 @@ def improve():
     data = {
         "model": "gpt-4o-mini",
         "messages": [
-            {"role": "system", "content": "You will be given a full transcript of a conversation between a doctor and a patient. Please analyze the transcript and return a single sentence that summarized one thing the doctor could have done better during this encounter to have made a better experience in terms of patient safety. Please respond with a sentence no longer than 10 words that summarizes one thing the doctor could improve on next time that could lead to better patient safety in regards to the context of the transcript provided."},
+            {"role": "system", "content": "You will be given a full transcript of a conversation between a doctor and a patient. Please analyze the transcript and return one thing the doctor could have done better during this encounter to have made a better experience in terms of patient safety. Please respond with a summary of one thing the doctor could improve on next time that could lead to better patient safety in regards to the context of the transcript provided."},
             {"role": "user", "content": "This is the transcript of the conversation: " + text_content},
         ],
         "temperature": 0.7
