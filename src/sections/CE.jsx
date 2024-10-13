@@ -16,6 +16,7 @@ const CE = () => {
   const [typing, setTyping] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef(null);
+  const [incomingMessageCount, setIncomingMessageCount] = useState(0);
 
   // Scroll to the bottom whenever messages change
   useEffect(() => {
@@ -134,6 +135,13 @@ const CE = () => {
     return () => clearInterval(interval);
   }, [fetchMessages2]);
 
+  useEffect(() => {
+    const newIncomingCount = chatHistory.filter(
+      (msg) => msg.direction === "incoming"
+    ).length;
+    setIncomingMessageCount(newIncomingCount);
+  }, [chatHistory]);
+
   // Handle Send Message
   const handleSend = () => {
     if (!inputMessage.trim()) return; // Prevent empty responses
@@ -199,27 +207,26 @@ const CE = () => {
       });
   }
 
-
   const stopServer = async () => {
     try {
-        const response = await fetch("http://localhost:5173/stp", { // Use the correct server URL and port
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+      const response = await fetch("http://localhost:5173/stp", {
+        // Use the correct server URL and port
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-        if (!response.ok) {
-            throw new Error("Failed to stop the server.");
-        }
+      if (!response.ok) {
+        throw new Error("Failed to stop the server.");
+      }
 
-        const result = await response.text();
-        console.log("Server stopped successfully:", result);
+      const result = await response.text();
+      console.log("Server stopped successfully:", result);
     } catch (error) {
-        console.error("Error stopping the server:", error);
+      console.error("Error stopping the server:", error);
     }
   };
-
 
   return (
     <div className="relative min-h-screen overflow-y-hidden no-scrollbar text-white antialiased selection:bg-rose-300 selection:text-rose-800">
@@ -238,7 +245,10 @@ const CE = () => {
           {/* Ensure background is transparent */}
           {/* Spline Embed */}
           <div className="h-2/4 z-3 relative bottom-[-10rem]">
-            <button className="h-[33rem] w-[33rem] z-3 relative bottom-[3rem] left-[8.5rem]" onClick={stopServer}>
+            <button
+              className="h-[33rem] w-[33rem] z-3 relative bottom-[3rem] left-[8.5rem]"
+              onClick={stopServer}
+            >
               <iframe
                 src="https://my.spline.design/cno1bottomcta-d2852393649091d6e5ee5337aaf2ebec/"
                 frameBorder="0"
@@ -251,14 +261,16 @@ const CE = () => {
             onClick={stopServer}
             className="w-[380px] h-[380px] rounded-full bg-transparent transition duration-200 z-4 absolute left-[198px] bottom-[353px]"
           ></Link>
-          <div className="flex items-center justify-center absolute top-[900px] left-[180px]">
-            <Link
-              to="/R"
-              className="text-5xl my-custom-font font-[40px] tracking-tighter text-fuchsia-500 z-3 transition-colors hover:text-fuchsia-700 duration-300 ease-in-out"
-            >
-              Next Steps
-            </Link>
-          </div>
+          {incomingMessageCount >= 6 && (
+            <div className="flex items-center justify-center absolute top-[900px] left-[180px]">
+              <Link
+                to="/R"
+                className="text-5xl my-custom-font font-[40px] tracking-tighter text-fuchsia-500 z-3 transition-colors hover:text-fuchsia-700 duration-300 ease-in-out"
+              >
+                Next Steps
+              </Link>
+            </div>
+          )}
         </div>
         <div className="w-1/2">
           <div className="flex justify-center items-center mb-10 mr-[85px]">
@@ -267,7 +279,7 @@ const CE = () => {
             </span>
           </div>
           <div className="flex justify-start">
-            <div className="box-border h-[800px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-slate-100 flex flex-col mb-[40px]">
+            <div className="box-border h-[700px] w-[700px] border-[4px] border-blue-300 hover:border-blue-500 transition-all hover:shadow-2xl hover:shadow-blue-500 ease-in-out duration-300 rounded-[1.25rem] bg-white/50 hover:bg-slate-100 flex flex-col mb-[40px]">
               {/* <div className = "h-1/10 flex items-center justify-center border-b-[2px]">
               <div className = "text-black text-2xl text-center">
                 bro

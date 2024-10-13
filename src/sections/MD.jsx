@@ -456,15 +456,15 @@ const fetchPatientQuestion = useCallback(async () => {
           Medications / Diagnosis
         </h3>
       </div>
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
         <button
           className="w-[140px] h-[140px] border-[2px] border-red-500 rounded-full flex items-center justify-center bg-gradient-to-r from-black to-[#0713f5] overflow-hidden hover:opacity-80 transition-all duration-300 ease-in-out active:opacity-50"
           onClick={openModal}
         >
           Click Here <br /> to Send Your <br /> Question!!
         </button>
-      </div>
-      <div className="flex flex-wrap mt-[-60px] pb-20">
+      </div> */}
+      <div className="flex flex-wrap mt-[80px] pb-20">
         <div className="w-1/2">
           <div className="flex justify-center items-center mb-10 ml-[60px] my-[18px]">
             <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">

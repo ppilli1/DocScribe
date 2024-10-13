@@ -29,11 +29,7 @@ const Dashboard = () => {
     delaySpeed: 500,
   });
 
-  const [submitDocument, setSubmitDocument] = useState(false)
-
-  const documentToggle = async () => {
-
-  }
+  const [uploadFeedback, setUploadFeedback] = useState("");
 
   const fileInputRef = useRef(null);
 
@@ -77,6 +73,14 @@ const Dashboard = () => {
     const files = event.target.files;
     const formData = new FormData();
 
+    // Check if all files are PDFs
+    const allPdfs = Array.from(files).every(file => file.type === 'application/pdf');
+
+    if (!allPdfs) {
+        setUploadFeedback("Incorrect document format, please select PDF files only");
+        return;
+    }
+
     // Append each file along with its relative path to the FormData object
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -91,10 +95,12 @@ const Dashboard = () => {
             }
         });
         console.log('Files uploaded successfully:', response.data);
+        setUploadFeedback("PDF successfully uploaded, your doctor will be with you shortly.");
     } catch (error) {
         console.error('Upload error:', error.response.data);
+        setUploadFeedback("An error occurred while uploading. Please try again.");
     }
-  };
+};
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white antialiased selection:bg-rose-300 selection:text-rose-800 hide-scrollbar">
@@ -169,7 +175,12 @@ const Dashboard = () => {
                     alt = "Patient History Form"
                     className = "ml-8 w-[220px] h-[240px] relative top-[60px] z-10"
                 />
-              </button>      
+              </button>
+              {uploadFeedback && (
+          <div className={`mt-4 p-2 rounded ${uploadFeedback.includes("successfully") ? "bg-green-500" : "bg-red-500"}`}>
+            {uploadFeedback}
+          </div>
+        )}      
             </div> 
         </div>
         <div className="w-1/3">

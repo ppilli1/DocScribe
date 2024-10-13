@@ -134,8 +134,33 @@ const R = () => {
           <div className="flex items-center justify-center mb-10">
             <DoctorEfficiencyBar efficiency={doctorEfficiency} />
           </div>
+          <div className="flex justify-center items-center mt-32">
+            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
+              Updated Patient History
+            </span>
+          </div>
+          <div className = "flex flex-col items-center justify-center mt-[50px] mb-[140px]">
+              <div className = "flex items-center justify-center bg-blue-500 rounded-full mx-[140px]">
+                <span className = "py-4 px-6 text-white text-center">Hey there! Please click the button below to receive your updated patient history information.</span>
+              </div>
+              {/* <input
+                type="file"
+                ref={fileInputRef} // Attach the ref here
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+                directory="false"
+              /> */}
+              <button className = "hover:opacity-50 ease-in-out duration-300 hover:scale-150">
+                <img
+                    src = {patientHistory}
+                    alt = "Patient History Form"
+                    className = "ml-8 w-[220px] h-[240px] relative top-[50px] z-10"
+                />
+              </button>      
+            </div> 
         </div>
         <div className="w-1/2 border-r-[2px] border-l-[2px] border-red-500 border-b-[2px]">
+        <div className = "mt-[125px]">
           <div className="flex items-center justify-center mb-10">
             <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
               Future Improvements
@@ -168,53 +193,6 @@ const R = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="w-full border-t-[2px] border-blue-500 pb-80">
-        <div className="flex justify-center items-center">
-          <div className="flex justify-center items-center my-10">
-            <span className="text-2xl my-custom-font font-[10px] tracking-tighter text-blue-700">
-              Medications
-            </span>
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          <div className="w-1/3">
-            <div className="flex justify-center">
-                <div className = "h-[33rem] w-[33rem]">
-                    <iframe
-                        src = "https://my.spline.design/bottlecopy-d43c86d7caf35e9a61a5d112250d0eed/"
-                        width = "100%"
-                        height = "100%"
-                    ></iframe>
-                </div>
-            </div>
-          </div>
-          <div className = "w-1/3">
-            <div className = "flex flex-col items-center justify-center mt-[60px]">
-              <div className = "flex items-center justify-center bg-blue-500 rounded-full mx-6">
-                <span className = "py-4 px-6 text-white text-center">Hey there! Please click the button below to receive your updated patient history information.</span>
-              </div>
-              {/* <input
-                type="file"
-                ref={fileInputRef} // Attach the ref here
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-                directory="false"
-              /> */}
-              <button className = "hover:opacity-50 ease-in-out duration-300 hover:scale-150">
-                <img
-                    src = {patientHistory}
-                    alt = "Patient History Form"
-                    className = "ml-8 w-[220px] h-[240px] relative top-[60px] z-10"
-                />
-              </button>      
-            </div> 
-        </div>
-          <div className="w-1/3">
-            <div className="flex justify-center">
-                bro
-            </div>
           </div>
         </div>
       </div>
