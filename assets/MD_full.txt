@@ -7,38 +7,41 @@ Here is the organized transcription of the provided medical history form:
 - Age: 39
 
 **Allergies:**
-- Patient's allergies: Penicillin (Rash, Swelling), Pollen (Sneezing, Itchy Eyes)
+- Allergies: Penicillin
+- Allergic Reaction: Rash, Swelling
+- Other Allergies: Pollen (Sneezing, Itchy Eyes)
 
 **Medications:**
-- Patient's medications: Ibuprofen (1 time per day, 200 mg), Lisinopril (3 times per day, 10 mg), Metformin (2 times per day, 500 mg)
+- Ibuprofen: 1 time per day, 200 mg
+- Lisinopril: 1 time per day, 10 mg
+- Metformin: 2 times per day, 500 mg
 
 **Health Maintenance Screening Test History:**
 - Cholesterol: Date: 01/15/2024, Facility/Provider: Health Clinic, Abnormal Result? N
 - Colonoscopy/Sigmoid: Date: 12/10/2023, Facility/Provider: City Hospital, Abnormal Result? N
-- Mammogram: Date: 09/10/2023, Facility/Provider: Health Wellness, Abnormal Result? N
-- Pap Smear: Date: 11/08/2020, Facility/Provider: , Abnormal Result? N
-- Bone Density: Date: 04/12/2022, Facility/Provider: , Abnormal Result? N
-- Last Tetanus Booster or TdaP: 12/10/2021
-- Last Pneumovax (Pneumonia): 07/21/2022
-- Last Flu Vaccine: 10/05/2023
+- Mammogram: Date: 11/08/2020, Facility/Provider: , Abnormal Result? N
+- Pap Smear: Date: 04/12/2022, Facility/Provider: , Abnormal Result? N
+- Bone Density: Date: 12/10/2021, Facility/Provider: , Abnormal Result? N
+- Last Tetanus Booster or TdaP: 07/21/2022
+- Last Pneumovax (Pneumonia): 10/05/2023
+- Last Flu Vaccine: 
 - Last Prevnar: 
 - Last Zoster Vaccine (Shingles): 
 
 **Personal Medical History:**
 - Alcoholism/Drug Abuse: Yes
-- Asthma: Yes (Controlled with medication)
+- Asthma: Yes, Mild, occasional use of inhaler
 - Cancer: (type: )
 - Depression/Anxiety/Bipolar/Suicidal: Yes
 - Diabetes: (type: Diagnosed in 2020, on Metformin)
-- Emphysema (COPD): Yes (Mild, occasional use of inhaler)
+- Emphysema (COPD): 
 - Heart Disease: 
-- High Blood Pressure (hypertension): Yes (Under control with diet)
+- High Blood Pressure (hypertension): Yes, Controlled with medication
 - High Cholesterol: Yes
 - Hypothyroidism/Thyroid Disease: 
 - Renal (kidney) Disease: 
-- Migraine Headaches: Yes (Treated with pain relievers)
+- Migraine Headaches: Yes, Treated with pain relievers
 - Stroke: 
-- Other: 
 - Other: 
 
 **Current Surgeries:**
@@ -61,9 +64,7 @@ Here is the organized transcription of the provided medical history form:
 **Other Health Issues:**
 - Tobacco Use: 
   - Smoke Cigarettes? N
-  - Current: Packs/day: , # of Years: 
-  - Past: Quit Date: , Packs/day: , # of Years: 
-- Alcohol/Drug Abuse: 
+- Alcohol/Drug Use: 
   - Do you drink alcohol? Y
   - # of Drinks/week: 
   - Do you use marijuana or recreational drugs? N
@@ -73,7 +74,9 @@ Here is the organized transcription of the provided medical history form:
 **Exercise:**
 - Do you exercise regularly? Y
 - What kind of exercise? 
-- Duration: How long (min.): , How often: 
+- Duration: 
+- How long (min.): 
+- How often: 
 
 **Sexual Activity:**
 - Sexually involved currently? Y

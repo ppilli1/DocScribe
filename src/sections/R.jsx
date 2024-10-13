@@ -3,7 +3,8 @@ import ParticlesBackground from "../components/ParticlesBackground";
 import { useState, useRef, useEffect, useCallback } from "react";
 import DoctorEfficiencyBar from "../components/DoctorEfficiencyBar";
 import patientHistory from "../assets/medScribe.webp";
-
+import { saveAs } from 'file-saver';
+import axios from 'axios';
 const R = () => {
   const [doctorEfficiency, setDoctorEfficiency] = useState(70);
 
@@ -16,6 +17,36 @@ const R = () => {
       direction: "incoming",
     },
   ]);
+
+
+
+
+
+  const handleDownload = async (event) => {
+    const filePath = './patient_data_table.pdf'; 
+
+
+    // Use the file-saver library to trigger the download
+    console.log("started process")
+    // try {
+    //     const response = await axios.get('http://127.0.0.1:5173/match', {
+    //         headers: {
+    //             'Access-Control-Allow-Origin': '*',
+    //         }
+    //     });
+    //     console.log('File uploaded successfully:', response.data);
+    // } catch (error) {
+    //     console.error('Upload error:', error.response.data);
+    // }
+    saveAs(filePath, 'NewPatientHistory.pdf');
+  }
+
+
+
+
+
+
+
 
   const fMessages = useCallback(async () => {
     try {
@@ -213,7 +244,7 @@ const R = () => {
             style={{ display: 'none' }}
             directory="false"
             /> */}
-            <button className="hover:opacity-50 ease-in-out duration-300 hover:scale-150">
+            <button className="hover:opacity-50 ease-in-out duration-300 hover:scale-150" onClick={handleDownload}>
               <img
                 src={patientHistory}
                 alt="Patient History Form"

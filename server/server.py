@@ -7,10 +7,12 @@ import shutil
 import rate_encounter
 from flask import jsonify
 import whisperMD
+import multiprocessing
 import extractDoc
 import postAnalysis
 from langchain.schema import HumanMessage, AIMessage
 from langchain_community.chat_models import ChatOpenAI
+import generate_pdf
 app = Flask(__name__)
 #specify domain and port for every endpoint
 CORS(app, resources={r"/MD": {"origins": "http://localhost:5173"}})
@@ -18,11 +20,14 @@ CORS(app, resources={r"/OR": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/upload": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/refine": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/stp": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/rate": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/pdf": {"origins": "http://localhost:5173"}})
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5174"}}, supports_credentials=True)
 api_key = os.getenv("OPENAI_API_KEY")
 messages_red = []
-
+ctx = multiprocessing.get_context("fork")
+pool = ctx.Pool()
     
 
 @app.route('/upload', methods=['POST'])
@@ -79,6 +84,11 @@ def stop():
 def try_rate():
     num = rate_encounter.ratingz()
     return num
+
+@app.route('/pdf', methods=['POST'])
+def make_pdf():
+    generate_pdf.create_patient_pdf()
+    return "PDF generated", 200
 
 if __name__ == '__main__':
     app.run(use_reloader=True, port=5173, threaded=True)

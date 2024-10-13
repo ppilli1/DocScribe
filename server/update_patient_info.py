@@ -43,10 +43,11 @@ def get_updated_patient_info():
     write_content = result.content
     return write_content
 
-new_pdf_data = get_updated_patient_info()
-new_pdf_data = new_pdf_data.replace("```python", "")
-new_pdf_data = new_pdf_data.replace("```", '').strip()
-new_pdf_data = ast.literal_eval(new_pdf_data)
-
+def lol():
+    new_pdf_data = get_updated_patient_info()
+    new_pdf_data = new_pdf_data.replace("```python", "")
+    new_pdf_data = new_pdf_data.replace("```", '').strip()
+    new_pdf_data = ast.literal_eval(new_pdf_data)
+    return new_pdf_data
 
 
