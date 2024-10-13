@@ -144,7 +144,7 @@ const Dashboard = () => {
         <div className = "w-1/3">
             <div className = "flex flex-col items-center justify-center">
               <div className = "flex items-center justify-center bg-blue-500 rounded-full mx-6">
-                <span className = "py-4 px-6 text-white">Hey there! Please click the Patient Form below to give us your patient history before meeting with your doctor.</span>
+                <span className = "py-4 px-6 text-white text-center">Hey there! Please click the Patient Form below to give us your patient history before meeting with your doctor.</span>
               </div>
               <input
                 type="file"
@@ -188,7 +188,7 @@ const Dashboard = () => {
                   >
                     <div className="z-10 flex items-center">
                       <span className="2xl:text-lg xl:text-sm lg:text-[1rem] md:text-sm sm:text-[1rem] text-sm font-light tracking-tight">
-                        Operation Room
+                        Clinical Errors
                       </span>
                       <MdArrowOutward />
                     </div>
