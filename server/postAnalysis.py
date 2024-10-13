@@ -12,6 +12,8 @@ from dotenv import load_dotenv
 import sys
 import select
 import time
+import spc
+import json
 
 
 
@@ -19,26 +21,8 @@ load_dotenv()
 
 api_key = os.getenv("OPENAI_API_KEY")
 
-NEON_GREEN = '\033[32m'
-RESET_COLOR = '\033[0m'
 
-
-
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-
-
-messages_medication = [HumanMessage(content = "this is the start of the convo. You will get a bunch of data of what is happening in a conversation between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with medication prescribed or told the patient to take based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the data and only respond if you think there has been some sort of error medication related. your response should be very concise and only be a statement stating the error made with medication.")]
-messages_diagnosis = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of errors the doctor may have made with the diagnosis based on what the patient described as their problem. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there has bees some sort of error diagnosis related. your response should be very concise and only be a statement stating the error made with diagnosis.")]
-messages_clarify = [HumanMessage(content = "this is the start of the convo. You will get a bunch of blurbs of text that are part of a conversation happening between a doctor and a patient. Using the context of the convo, please only respond with concise responses of questions that need to be clarified based on what the patient described as their problem or questions the doctor should ask to make a better diagnosis. Do not reply to this message. Every message after this will be an addition to the conversation and only respond if you think there is something the doctor should ask or clarify. Only respond with one question that you think should be asked or clarified and make sure it is concise.")]
-
-hundred_txt = ""
-hundred_txt_syn = ""
-
-# Event for synchronizations
-file_ready_events = [threading.Event(), threading.Event()]
-
-# Record chunk function
-def record_chunk():
+def mainAnalysis():
     transcript_path = './assets/MD_full.txt'
     questions_path = './assets/MD_question_return.txt'
     with open(transcript_path, 'r') as file:
@@ -74,11 +58,56 @@ def record_chunk():
 
         print(tt)
     
-    
-    
-def mainAnalysis():
-    pass
+    questions_list = json.loads(tt)
 
 
+    with open("./assets/refined_questions.txt", "a") as file:
+        for question in questions_list:
+            file.write(question + "\n")
+    
+    
+    
+def contradiction_analysis():
+    transcript_path = './assets/MD_full.txt'
+
+    with open(transcript_path, 'r') as file:
+        text_content = file.read()
+
+    url = 'https://api.openai.com/v1/chat/completions'
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + api_key
+    }
+    
+    data = {
+        "model": "gpt-4o-mini",
+        "messages": [
+            {"role": "system", "content": "You will be given a full transcript of a conversation between a doctor and a patient. Please analyze the transcript and return all the sentences or anything said by the patient, not the doctor."},
+            {"role": "user", "content": "This is the transcript of the conversation: " + text_content},
+        ],
+        "temperature": 0.7
+    }
+    response = requests.post(url, headers=headers, json=data)
+    
+
+    # Safely handle missing keys
+    response_json = response.json()
+    if 'choices' in response_json:
+        tt = response_json['choices'][0]['message']['content']
+
+    contradictions = spc.space(tt)
+    print("Number of contradictions: " + str(contradictions))
+    
+
+
+    if contradictions >= 3:
+        with open("./assets/refined_questions.txt", "a") as file:
+
+            file.write("The patient's transcription contained 3 or more contradictions, so you may want to run through their exact problem step by step with them." + "\n")
+
+def refine():
+    mainAnalysis()
+    contradiction_analysis()
+    
 if __name__ == "__main__":
-    record_chunk()
+    refine()
